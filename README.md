@@ -1,6 +1,6 @@
 # iTyped
 
-[![npm package](https://img.shields.io/badge/npm-v0.0.2-blue.svg)](https://www.npmjs.com/package/ityped)
+[![npm package](https://img.shields.io/badge/npm-v0.0.3-lightgray.svg)](https://www.npmjs.com/package/ityped)
 
 > Dead simple Animated typing, with no dependencies.
 
@@ -24,7 +24,7 @@ At now, if you just need to render Strings, **iTyped** is the best solution for 
 #### Install
 
 Npm: `npm install ityped` </br>
-CDN: `https://unpkg.com/ityped@0.0.2`
+CDN: `https://unpkg.com/ityped@0.0.3`
 
 
 #### The Gist:
