@@ -118,8 +118,8 @@ iTyped Configuration
   * @param {Integer} backDelay Time before backspacing
   * @param {Integer} startDelay Time before typing starts
   * @param {Boolean} loop The animation loop
-  * @param {Function} onFinished The callback that will called if the loop are false and when the last word are
-  * decremented
+  * @param {Function} onFinished The callback that will called if the 
+  * loop are false and when the last word are decremented
   **/
  
   const config = {
