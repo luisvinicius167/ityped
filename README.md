@@ -22,6 +22,23 @@ Npm: `npm install ityped` </br>
 CDN: `https://unpkg.com/ityped@0.0.2`
 
 
+#### The Gist:
+
+```javascript
+import { init } from 'ityped';
+
+init(`#element`, {
+  // required - for now, only acceptting texts.
+  strings: ['Dead simple animated typing.', 'No dependencies'],
+  // optional
+  typeSpeed: 90, //default: 70 - value in milliseconds
+  // optional
+  pause: 1000, //default: 500 - value in milliseconds
+  // optional
+  loop: true //default: false
+});
+```
+
 #### Want the animated blinking cursor? Add this CSS.
 
 ```css
@@ -46,26 +63,6 @@ CDN: `https://unpkg.com/ityped@0.0.2`
     50% { opacity:0; }
     100% { opacity:1; }
 }
-```
-
-#### The Gist:
-
-```javascript
-import { init } from 'ityped';
-
-init(`#element`, {strings: ['Dead simple animated typing.', 'No dependencies']});
-
-// or you can pass the initial configuration
-const config = {
-  // required
-  strings: ['Dead simple animated typing.', 'No dependencies']
-  // optional
-  typeSpeed: 90, //default: 70 - value in milliseconds
-  // optional
-  pause: 1000, //default: 500 - value in milliseconds
-  // optional
-  loop: true //default: false
-};
 ```
 
 ### API
