@@ -65,15 +65,14 @@
    * @return {Promise}
    */ 
   function setProps ( config ) {
-    let props = {};
+    let props = config;
     props.strings    = config.strings    || ['Put you string here...', 'and Enjoy!']
-    props.typeSpeed  = config.typeSpeed  || 55;
-    props.backDelay  = config.backDelay  || 200;
+    props.typeSpeed  = config.typeSpeed  || 100;
+    props.backSpeed  = config.backSpeed  || 50;
+    props.backDelay  = config.backDelay  || 500;
+    props.startDelay = config.startDelay || 500;
     props.showCursor = config.showCursor || true;
-    props.backSpeed  = config.backSpeed  || 30;
     props.loop       = config.loop       || false;
-    // the backSpeed cannot be more rapid than typeSpeed
-    if (props.backSpeed > props.typeSpeed) props.backSpeed = props.typeSpeed
     if (props.showCursor) el.insertAdjacentElement('afterend', cursor)
     if (props.cursorChar !== undefined) cursor.textContent = props.cursorChar
 
@@ -101,7 +100,17 @@
    */
   function loopingOnWords(words) {
     forEach(words, function (word, index, arr) {
-      let time = (props.typeSpeed * word.length - 1);
+      let time = (props.typeSpeed * word.length - 1)
+      /**
+       * set the correct time
+       * with the differences of type and back
+       * speed
+       */ 
+      if (props.backSpeed < props.typeSpeed) {
+        time -= (props.typeSpeed - props.backSpeed) * word.length;
+      } else if (props.typeSpeed - props.backSpeed) {
+        time += (props.backSpeed - props.typeSpeed) * word.length;
+      }
       let done = this.async();
       let len = words.length;
       iterateWords(el, word, index, len).then(function () {
@@ -113,7 +122,7 @@
       if (props.loop) {
         loopingOnWords(words);
       }
-              // when the last word
+        // when the last word
         if (props.onFinished !== undefined && typeof props.onFinished === "function"){
           props.onFinished();
         }
@@ -169,7 +178,9 @@
           setTimeout(function () {
             decrement(element, word, index, wordsLengthArray)
               .then(function () {
-                resolve();
+                setTimeout(function(){
+                  resolve();
+                }, props.startDelay)
               });
           }, props.backDelay)
         });
