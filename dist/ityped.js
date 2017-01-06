@@ -52,6 +52,22 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   cursor.classList.add('ityped-cursor');
   cursor.textContent = '|';
 
+  function init(element, config) {
+    el = document.querySelector(element);
+
+    props = config;
+    props.strings = config.strings || ['Put you string here...', 'and Enjoy!'];
+    props.typeSpeed = config.typeSpeed || 70;
+    props.pause = config.pause || 500;
+    props.loop = config.loop || false;
+
+    el.insertAdjacentElement('afterend', cursor);
+    var words = props.strings,
+        len = words.length;
+
+    loopingOnWords(words);
+  }
+
   function loopingOnWords(words, handler) {
     forEach(words, function (word, index, arr) {
       var time = props.typeSpeed * word.length - 1;
@@ -67,21 +83,6 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         loopingOnWords(words);
       }
     });
-  }
-
-  function init(element, config) {
-    el = document.querySelector(element);
-    props = config;
-
-    props.typeSpeed = config.typeSpeed || 100;
-    props.pause = config.pause || 400;
-    props.loop = config.loop || false;
-
-    el.insertAdjacentElement('afterend', cursor);
-    var words = props.strings,
-        len = words.length;
-
-    loopingOnWords(words);
   }
 
   function increment(span, word, interval) {
@@ -131,7 +132,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         if (iteratedI === 1) {
           resolve();
         }
-      }, props.typeSpeed / 2 * i);
+      }, props.typeSpeed / 3 * i);
     };
 
     for (var i = len; i > 0; i--) {

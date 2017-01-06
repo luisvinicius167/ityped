@@ -54,6 +54,22 @@
     .add('ityped-cursor');
   cursor.textContent = '|';
 
+  function init(element, config) {
+    el = document.querySelector(element);
+
+    props = config;
+    props.strings = config.strings || ['Put you string here...', 'and Enjoy!']
+    props.typeSpeed = config.typeSpeed || 70;
+    props.pause = config.pause || 500;
+    props.loop = config.loop || false;
+
+    el.insertAdjacentElement('afterend', cursor);
+    let words = props.strings,
+      len = words.length;
+
+    loopingOnWords(words);
+  }
+
   function loopingOnWords(words, handler) {
     forEach(words, function (word, index, arr) {
       let time = props.typeSpeed * word.length - 1;
@@ -71,23 +87,8 @@
     });
   }
 
-  function init(element, config) {
-    el = document.querySelector(element);
-    props = config;
-
-    props.typeSpeed = config.typeSpeed || 100;
-    props.pause = config.pause || 400;
-    props.loop = config.loop || false;
-
-    el.insertAdjacentElement('afterend', cursor);
-    let words = props.strings,
-      len = words.length;
-
-    loopingOnWords(words);
-  }
-
   function increment(span, word, interval) {
-    return new Promise(function(resolve, reject)  {
+    return new Promise(function (resolve, reject) {
       for (let i = 0; i < word.length; i++) {
         count = 0;
         let wordIndex = i;
@@ -108,14 +109,16 @@
   }
 
   function iterateWords(element, word, index, wordsLengthArray) {
-    return new Promise(function(resolve, reject){
-      increment(element, word).then(function() {
-        setTimeout(function () {
-          decrement(element, word, index, wordsLengthArray).then(function() {
-            resolve();
-          });
-        }, (props.pause || props.typeSpeed * 2))
-      });
+    return new Promise(function (resolve, reject) {
+      increment(element, word)
+        .then(function () {
+          setTimeout(function () {
+            decrement(element, word, index, wordsLengthArray)
+              .then(function () {
+                resolve();
+              });
+          }, (props.pause || props.typeSpeed * 2))
+        });
     })
   }
 
@@ -129,12 +132,12 @@
         if (iteratedI === 1) {
           resolve();
         }
-      }, props.typeSpeed / 2 * i);
+      }, props.typeSpeed / 3 * i);
     }
   }
 
   function decrement(span, word, index, lengthWords) {
-    return new Promise(function(resolve, reject){
+    return new Promise(function (resolve, reject) {
       let len = word.length;
       if (!props.loop && index + 1 === lengthWords) {
         span.innerHTML = word;

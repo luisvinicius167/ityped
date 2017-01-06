@@ -1,16 +1,18 @@
-# ITyped
+# iTyped
 
-[![npm package](https://img.shields.io/badge/npm-v0.0.1-blue.svg)](https://www.npmjs.com/package/ityped)
+[![npm package](https://img.shields.io/badge/npm-v0.0.2-blue.svg)](https://www.npmjs.com/package/ityped)
 
 > Dead simple Animated typing, with no dependencies.
 
 ---
 
+[iTyped Website ➞](https://ityped.surge.sh/)
+
 Enter in any string, and watch it type at the speed you've set, backspace what it's typed, 
 and begin a new sentence for however many strings you've set.
 
-### Why should you use ITyped?
- * Tiny size ~1.9kb;
+### Why should you use iTyped?
+ * Tiny size 2kb;
  * No jQuery dependency;
  * Save a lot of size. jQuery minified ~87kb + Typed.js minified plugin ~3.7kb;
 
@@ -51,15 +53,19 @@ CDN: `https://unpkg.com/ityped@0.0.1`
 ```javascript
 import { init } from 'ityped';
 
-init(`#element`, {
-  strings: [
-    'Dead simple animated typing.', 
-    'No dependencies'
-  ],
-  typeSpeed: 120, // default: 100 - value in milliseconds
-  pause: 500, // default: 400 - value in milliseconds
-  loop: true // default: false
-});
+init(`#element`, {strings: ['Dead simple animated typing.', 'No dependencies']});
+
+// or you can pass the initial configuration
+const config = {
+  // required
+  strings: ['Dead simple animated typing.', 'No dependencies']
+  // optional
+  typeSpeed: 90, //default: 70 - value in milliseconds
+  // optional
+  pause: 1000, //default: 500 - value in milliseconds
+  // optional
+  loop: true //default: false
+};
 ```
 
 ### API
@@ -77,7 +83,12 @@ init(`#element`, {
  init('#element', config);
 ```
 
-Typed Configuration
+```html
+
+<span id="element"></span>
+
+```
+iTyped Configuration
 
 ```javascript
 /**
@@ -94,8 +105,8 @@ Typed Configuration
       'Dead simple animated typing.', 
       'No dependencies'
     ],
-    typeSpeed: 120, // default: 100
-    pause: 500, // default: 400
+    typeSpeed: 120, // default: 70
+    pause: 500, // default: 500
     loop: true // default: false
   }
 ```
