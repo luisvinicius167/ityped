@@ -54,13 +54,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
   function loopingOnWords(words, handler) {
     forEach(words, function (word, index, arr) {
-      // let time = props.typeSpeed * word.length - 1;
+      var time = props.typeSpeed * word.length - 1;
       var done = this.async();
       var len = words.length;
       iterateWords(el, word, index, len).then(function () {
         setTimeout(function () {
           done();
-        }, 1000);
+        }, time);
       });
     }, function () {
       if (props.loop) {
