@@ -58,22 +58,38 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   cursor.textContent = '|';
 
   /**
+   * @name setProps
+   * @description Set the ityped propertys configuration
+   * @param {Object} config The configuration propertys
+   * @return {Promise}
+   */
+  function setProps(config) {
+    var props = config;
+    props.strings = config.strings || ['Put you string here...', 'and Enjoy!'];
+    props.typeSpeed = config.typeSpeed || 100;
+    props.backSpeed = config.backSpeed || 50;
+    props.backDelay = config.backDelay || 500;
+    props.startDelay = config.startDelay || 500;
+    props.showCursor = config.showCursor || true;
+    props.loop = config.loop || false;
+    if (props.showCursor) el.insertAdjacentElement('afterend', cursor);
+    if (props.cursorChar !== undefined) cursor.textContent = props.cursorChar;
+
+    return Promise.resolve(props);
+  }
+  /**
    * @name init
    * @param {String} el The element that will receive the strings
    * @param {Object} confing The initial configuration
    */
   function init(element, config) {
     el = document.querySelector(element);
-    props = config;
-    props.strings = config.strings || ['Put you string here...', 'and Enjoy!'];
-    props.typeSpeed = config.typeSpeed || 70;
-    props.pause = config.pause || 500;
-    props.loop = config.loop || false;
-    el.insertAdjacentElement('afterend', cursor);
-    var words = props.strings,
-        len = words.length;
-
-    loopingOnWords(words);
+    setProps(config).then(function (propertys) {
+      props = propertys;
+      var words = props.strings,
+          len = words.length;
+      loopingOnWords(words);
+    });
   }
 
   /**
@@ -84,6 +100,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   function loopingOnWords(words) {
     forEach(words, function (word, index, arr) {
       var time = props.typeSpeed * word.length - 1;
+      /**
+       * set the correct time
+       * with the differences of type and back
+       * speed
+       */
+      if (props.backSpeed < props.typeSpeed) {
+        time -= (props.typeSpeed - props.backSpeed) * word.length;
+      } else if (props.typeSpeed - props.backSpeed) {
+        time += (props.backSpeed - props.typeSpeed) * word.length;
+      }
       var done = this.async();
       var len = words.length;
       iterateWords(el, word, index, len).then(function () {
@@ -149,10 +175,13 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       increment(element, word).then(function () {
         setTimeout(function () {
           decrement(element, word, index, wordsLengthArray).then(function () {
-            resolve();
+            setTimeout(function () {
+              resolve();
+            }, props.startDelay);
           });
-        }, props.pause);
+        }, props.backDelay);
       });
+      // console.log(word, index, wordsLengthArray
     });
   }
   /**
@@ -175,7 +204,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
         if (iteratedI === 1) {
           resolve();
         }
-      }, props.typeSpeed / 3 * i);
+      }, props.backSpeed * i);
     };
 
     for (var i = len; i > 0; i--) {
@@ -194,10 +223,17 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   function decrement(span, word, index, lengthWords) {
     return new Promise(function (resolve, reject) {
       var len = word.length;
-      if (!props.loop && index + 1 === lengthWords) {
-        span.innerHTML = word;
-      } else if (props.loop) {
-        interateInsideDecrement(span, word, len, resolve);
+      // if is the last letter and the last word and no loop
+      if (index + 1 === lengthWords) {
+        if (!props.loop) {
+          // when the last word
+          if (props.onFinished !== undefined && typeof props.onFinished === "function") {
+            props.onFinished();
+          }
+          span.innerHTML = word;
+        } else if (props.loop) {
+          interateInsideDecrement(span, word, len, resolve);
+        }
       } else if (index + 1 !== lengthWords) {
         interateInsideDecrement(span, word, len, resolve);
       }

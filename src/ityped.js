@@ -122,10 +122,6 @@
       if (props.loop) {
         loopingOnWords(words);
       }
-        // when the last word
-        if (props.onFinished !== undefined && typeof props.onFinished === "function"){
-          props.onFinished();
-        }
     });
   }
   /**
@@ -184,6 +180,7 @@
               });
           }, props.backDelay)
         });
+        // console.log(word, index, wordsLengthArray
     })
   }
   /**
@@ -223,7 +220,13 @@
       let len = word.length;
       // if is the last letter and the last word and no loop
       if (index + 1 === lengthWords) {
-        if (!props.loop) span.innerHTML = word;
+        if (!props.loop) {
+        // when the last word
+          if (props.onFinished !== undefined && typeof props.onFinished === "function"){
+              props.onFinished();
+          }
+          span.innerHTML = word;
+        }
         else if (props.loop) {
           interateInsideDecrement(span, word, len, resolve);
         }
