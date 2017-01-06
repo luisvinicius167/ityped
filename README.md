@@ -16,7 +16,7 @@ Enter in any string, and watch it type at the speed you've set, backspace what i
 and begin a new sentence for however many strings you've set.
 
 ### Why should you use iTyped?
- * iTyped has a tiny size: 2.4kb
+ * iTyped has a tiny size: 2.4kb.
  * No jQuery dependency
  * Just install and enjoy!
  
@@ -113,16 +113,16 @@ iTyped Configuration
   * @param {Integer} backDelay Time before backspacing
   * @param {Integer} startDelay Time before typing starts
   * @param {Boolean} loop The animation loop
-  * @param {Function} onFinished The callback that will handler when the last word are
+  * @param {Function} onFinished The callback that will called if the loop are false and when the last word are
   * decremented
   **/
  
   const config = {
     strings: ['Dead simple animated typing.', 'No dependencies'],
     //optional
-    typeSpeed: 55, //default
+    typeSpeed: 100, //default
     //optional
-    backSpeed: 30, //default
+    backSpeed: 50, //default
     //optional 
     startDelay: 500, //default
     //optional
@@ -131,7 +131,8 @@ iTyped Configuration
     loop: false //default
     //optional    
     cursorChar: "|", //default
-    // optional callback called when the last string was typed
+    // optional callback called when the last string was typed.
+    // and if the loop are false
     onFinished: function(){},
   }
 ```
