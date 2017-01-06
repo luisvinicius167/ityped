@@ -2,8 +2,9 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
 /**
  * @name ityped
- * @description Dead simple Animated Type with no dependencies
+ * @description Dead simple Animated Typing with no dependencies
  * @author Luis Vinícius
+ * @email luis@uilabs.me
  */;
 (function (root, factory) {
   if (typeof define === "function" && define.amd) {
@@ -16,6 +17,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     root.ityped = factory;
   }
 })(this, function (global) {
+  /**
+   * async foreach
+   * https://www.npmjs.com/package/async-foreach
+   */
   (function (a) {
     a.forEach = function (a, b, c) {
       var d = -1,
@@ -44,23 +49,26 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   var el = void 0,
       props = void 0,
-      cursor = document.createElement('span');
 
   /**
-   * creating the cursor
-   */
+  * creating the cursor
+  */
+  cursor = document.createElement('span');
   cursor.classList.add('ityped-cursor');
   cursor.textContent = '|';
 
+  /**
+   * @name init
+   * @param {String} el The element that will receive the strings
+   * @param {Object} confing The initial configuration
+   */
   function init(element, config) {
     el = document.querySelector(element);
-
     props = config;
     props.strings = config.strings || ['Put you string here...', 'and Enjoy!'];
     props.typeSpeed = config.typeSpeed || 70;
     props.pause = config.pause || 500;
     props.loop = config.loop || false;
-
     el.insertAdjacentElement('afterend', cursor);
     var words = props.strings,
         len = words.length;
@@ -68,7 +76,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     loopingOnWords(words);
   }
 
-  function loopingOnWords(words, handler) {
+  /**
+   * @name loopingOnWords
+   * @description Loop on each string passed
+   * @param {Array} words The array that contain the words
+   */
+  function loopingOnWords(words) {
     forEach(words, function (word, index, arr) {
       var time = props.typeSpeed * word.length - 1;
       var done = this.async();
@@ -84,8 +97,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       }
     });
   }
-
-  function increment(span, word, interval) {
+  /**
+   * @name increment
+   * @description Increment each letter and append it on element
+   * @param {Element} span The Element that will receive the letters
+   * @param {String} word The string that will be looped to
+   * get each letter
+   * @return {Promise}
+   */
+  function increment(span, word) {
     return new Promise(function (resolve, reject) {
       var _loop = function _loop(i) {
         count = 0;
@@ -105,11 +125,25 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       }
     });
   }
-
+  /**
+   * @name appendWord
+   * @description Append each letter on Element
+   * @param {Element} el The Element that will receive the letter
+   * @param {String} word The string that will be appended
+   */
   function appendWord(el, word) {
     el.innerHTML += word;
   }
 
+  /**
+   * @name iterateWords
+   * @description Iterate on each word, incrementing and decrementing
+   * @param {Element} element The Element that will receive the letters of word
+   * @param {String} word The string that is the word
+   * @param {Integer} index The index position of the words Array
+   * @param {Integer} wordsLengthArray The length of words Array
+   * @return {Promise}
+   */
   function iterateWords(element, word, index, wordsLengthArray) {
     return new Promise(function (resolve, reject) {
       increment(element, word).then(function () {
@@ -117,11 +151,20 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           decrement(element, word, index, wordsLengthArray).then(function () {
             resolve();
           });
-        }, props.pause || props.typeSpeed * 2);
+        }, props.pause);
       });
     });
   }
-
+  /**
+   * @name interateInsideDecrement
+   * @description Iterate on each word, inside the decrement function for decrement the word
+   * @param {Element} span The Element that will receive the letters of word
+   * @param {String} word The string that is the word
+   * @param {Integer} len The length of words Array
+   * @param {Promise} resolve The Promise.resolve method that will be trigerred when
+   * the decrement iteration are finished
+   * @return {Promise}
+   */
   function interateInsideDecrement(span, word, len, resolve) {
     var _loop2 = function _loop2() {
       var iteratedI = i;
@@ -140,6 +183,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     }
   }
 
+  /**
+   * @name decrement
+   * @description decrement the word in the correct case
+   * @param {Element} span The Element that will receive the letters of word
+   * @param {String} word The string that is the word
+   * @param {Integer} index The index of the Array that contain the word
+   * @param {Integer} lengthWords The length of words Array
+   */
   function decrement(span, word, index, lengthWords) {
     return new Promise(function (resolve, reject) {
       var len = word.length;
@@ -152,6 +203,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
       }
     });
   }
+
+  /**
+   * Return the init function
+   */
   return { init: init };
 }(this));
 //# sourceMappingURL=ityped.js.map
