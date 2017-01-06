@@ -56,13 +56,13 @@
 
   function loopingOnWords(words, handler) {
     forEach(words, function (word, index, arr) {
-      let time = props.typeSpeed * word.length - 1;
+      // let time = props.typeSpeed * word.length - 1;
       var done = this.async();
       let len = words.length;
       iterateWords(el, word, index, len).then(function () {
         setTimeout(function () {
           done();
-        }, time)
+        }, 1000)
       })
     }, function () {
       if (props.loop) {

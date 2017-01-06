@@ -54,13 +54,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
   function loopingOnWords(words, handler) {
     forEach(words, function (word, index, arr) {
-      var time = props.typeSpeed * word.length - 1;
       var done = this.async();
       var len = words.length;
       iterateWords(el, word, index, len).then(function () {
         setTimeout(function () {
           done();
-        }, time);
+        }, 1000);
       });
     }, function () {
       if (props.loop) {
@@ -74,7 +73,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     props = config;
 
     props.typeSpeed = config.typeSpeed || 100;
-    props.pause = config.pause || props.typeSpeed * 4;
+    props.pause = config.pause || 400;
     props.loop = config.loop || false;
 
     el.insertAdjacentElement('afterend', cursor);
