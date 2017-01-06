@@ -6,15 +6,20 @@
 
 ---
 
+<p align="center">
+  <img src="img/itypedjs.gif" widt="400"/>
+</p>
+
 [iTyped Website ➞](https://ityped.surge.sh/)
 
 Enter in any string, and watch it type at the speed you've set, backspace what it's typed, 
 and begin a new sentence for however many strings you've set.
 
 ### Why should you use iTyped?
- * Tiny size 2kb;
+ * iTyped has a tiny size: ~1.9kb;
  * No jQuery dependency;
- * Save a lot of size. jQuery minified ~87kb + Typed.js minified plugin ~3.7kb;
+ 
+At now, if you just need to render Strings, **iTyped** is the best solution for you.
 
 #### Install
 
