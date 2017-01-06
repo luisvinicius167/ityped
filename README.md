@@ -53,29 +53,34 @@ init(`#element`, {
 });
 ```
 
-#### Want the animated blinking cursor? Add this CSS.
+#### Want the animated blinking cursor? Add this CSS and customize as you want!
 
 ```css
-.typed-cursor{
+.ityped-cursor {
+    font-size: 2.2rem;
     opacity: 1;
-    -webkit-animation: blink 0.7s infinite;
-    -moz-animation: blink 0.7s infinite;
-    animation: blink 0.7s infinite;
+    -webkit-animation: blink 0.3s infinite;
+    -moz-animation: blink 0.3s infinite;
+    animation: blink 0.3s infinite;
+    animation-direction: alternate;
 }
-@keyframes blink{
-    0% { opacity:1; }
-    50% { opacity:0; }
-    100% { opacity:1; }
+
+@keyframes blink {
+    100% {
+        opacity: 0;
+    }
 }
-@-webkit-keyframes blink{
-    0% { opacity:1; }
-    50% { opacity:0; }
-    100% { opacity:1; }
+
+@-webkit-keyframes blink {
+    100% {
+        opacity: 0;
+    }
 }
-@-moz-keyframes blink{
-    0% { opacity:1; }
-    50% { opacity:0; }
-    100% { opacity:1; }
+
+@-moz-keyframes blink {
+    100% {
+        opacity: 0;
+    }
 }
 ```
 
