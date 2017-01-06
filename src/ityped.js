@@ -59,22 +59,39 @@
   cursor.textContent = '|';
 
   /**
+   * @name setProps
+   * @description Set the ityped propertys configuration
+   * @param {Object} config The configuration propertys
+   * @return {Promise}
+   */ 
+  function setProps ( config ) {
+    let props = {};
+    props.strings    = config.strings    || ['Put you string here...', 'and Enjoy!']
+    props.typeSpeed  = config.typeSpeed  || 55;
+    props.backDelay  = config.backDelay  || 200;
+    props.showCursor = config.showCursor || true;
+    props.backSpeed  = config.backSpeed  || 30;
+    props.loop       = config.loop       || false;
+    // the backSpeed cannot be more rapid than typeSpeed
+    if (props.backSpeed > props.typeSpeed) props.backSpeed = props.typeSpeed
+    if (props.showCursor) el.insertAdjacentElement('afterend', cursor)
+    if (props.cursorChar !== undefined) cursor.textContent = props.cursorChar
+
+    return Promise.resolve(props);
+  }
+  /**
    * @name init
    * @param {String} el The element that will receive the strings
    * @param {Object} confing The initial configuration
    */
   function init(element, config) {
     el = document.querySelector(element);
-    props = config;
-    props.strings = config.strings || ['Put you string here...', 'and Enjoy!']
-    props.typeSpeed = config.typeSpeed || 70;
-    props.pause = config.pause || 500;
-    props.loop = config.loop || false;
-    el.insertAdjacentElement('afterend', cursor);
-    let words = props.strings,
+    setProps(config).then(function(propertys){
+      props = propertys;
+      let words = props.strings,
       len = words.length;
-
-    loopingOnWords(words);
+      loopingOnWords(words);
+    })
   }
 
   /**
@@ -84,7 +101,7 @@
    */
   function loopingOnWords(words) {
     forEach(words, function (word, index, arr) {
-      let time = props.typeSpeed * word.length - 1;
+      let time = (props.typeSpeed * word.length - 1);
       let done = this.async();
       let len = words.length;
       iterateWords(el, word, index, len).then(function () {
@@ -96,6 +113,10 @@
       if (props.loop) {
         loopingOnWords(words);
       }
+              // when the last word
+        if (props.onFinished !== undefined && typeof props.onFinished === "function"){
+          props.onFinished();
+        }
     });
   }
   /**
@@ -150,7 +171,7 @@
               .then(function () {
                 resolve();
               });
-          }, props.pause)
+          }, props.backDelay)
         });
     })
   }
@@ -174,7 +195,7 @@
         if (iteratedI === 1) {
           resolve();
         }
-      }, props.typeSpeed / 3 * i);
+      }, props.backSpeed * i);
     }
   }
 
@@ -189,14 +210,15 @@
   function decrement(span, word, index, lengthWords) {
     return new Promise(function (resolve, reject) {
       let len = word.length;
-      if (!props.loop && index + 1 === lengthWords) {
-        span.innerHTML = word;
-      } else if (props.loop) {
-        interateInsideDecrement(span, word, len, resolve);
+      // if is the last letter and the last word and no loop
+      if (index + 1 === lengthWords) {
+        if (!props.loop) span.innerHTML = word;
+        else if (props.loop) {
+          interateInsideDecrement(span, word, len, resolve);
+        }
       } else if (index + 1 !== lengthWords) {
         interateInsideDecrement(span, word, len, resolve);
       }
-
     })
   }
 
