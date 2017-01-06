@@ -19,7 +19,7 @@ and begin a new sentence for however many strings you've set.
 #### Install
 
 Npm: `npm install ityped` </br>
-CDN: `https://unpkg.com/ityped@0.0.1`
+CDN: `https://unpkg.com/ityped@0.0.2`
 
 
 #### Want the animated blinking cursor? Add this CSS.
