@@ -1,0 +1,21 @@
+{
+  "name": "ityped",
+  "version": "0.0.1",
+  "description": "Dead simple Animated typing, with no dependencies.",
+  "main": "dist/ityped.min.js",
+  "scripts": {
+    "build": "grunt",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Luis Vinicius <luis@startamus.com.br>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-plugin-transform-object-assign": "^6.8.0",
+    "babel-preset-es2015-script": "^1.1.0",
+    "grunt": "latest",
+    "grunt-babel": "^6.0.0",
+    "grunt-contrib-uglify": "^2.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "time-grunt": "^1.4.0"
+  }
+}
