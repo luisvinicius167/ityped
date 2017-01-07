@@ -22,12 +22,6 @@ and begin a new sentence for however many strings you've set.
 
 At now, if you just need to render Strings, **iTyped** is the best solution for you.
 
-## Using iTyped:
-
-- :white_square_button: [**iTyped.js**](https://ityped.surge.sh/)
-
-<br>
-If you're using iTyped, let me know! I'd love to see it.
 
 #### Install
 
