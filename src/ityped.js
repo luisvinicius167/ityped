@@ -75,8 +75,8 @@
     props.loop       = config.loop       || false;
 
     if (props.showCursor === undefined) props.showCursor = true;
-    if (props.showCursor) el.insertAdjacentElement('afterend', cursor)
-    if (props.cursorChar !== undefined) cursor.textContent = props.cursorChar
+    if (props.showCursor) el.insertAdjacentElement('afterend', cursor);
+    if (props.cursorChar !== undefined) cursor.textContent = props.cursorChar;
 
     return Promise.resolve(props);
   }
