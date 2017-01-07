@@ -44,12 +44,14 @@ init(`#element`, {
     startDelay: 500, //default
     //optional
     backDelay: 500, //default
+    //optional
+    loop: false, //default
     //optional    
-    loop: false //default
+    showCursor: true, //default
     //optional    
     cursorChar: "|", //default
     // optional callback called once the last string has been typed
-    onFinished: function(){},
+    onFinished: function(){}
 });
 ```
 
@@ -117,6 +119,7 @@ iTyped Configuration
   * @param {String} cursorChar The value of cursor character
   * @param {Integer} backDelay Time before backspacing
   * @param {Integer} startDelay Time before typing starts
+  * @param {Boolean} showCursor Show the cursor element
   * @param {Boolean} loop The animation loop
   * @param {Function} onFinished The callback that will be called (if `loop` is false) once the last word is decremented
   **/
@@ -132,7 +135,9 @@ iTyped Configuration
     //optional
     backDelay: 500, //default
     //optional    
-    loop: false //default
+    loop: false, //default
+    //optional
+    showCursor: true, //default
     //optional    
     cursorChar: "|", //default
     // optional callback called (if `loop` is false) once the
