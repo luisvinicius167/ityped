@@ -18,7 +18,7 @@
   /**
    * async foreach
    * https://www.npmjs.com/package/async-foreach
-   */ 
+   */
   (function (a) {
     a.forEach = function (a, b, c) {
       var d = -1,
@@ -26,7 +26,7 @@
       (function f(g) {
         var h,
           j = g === !1;
-        do 
+        do
           ++d;
         while (!(d in a) && d !== e);
         if (j || d === e) {
@@ -50,8 +50,8 @@
   let el,
     props,
     /**
-   * creating the cursor
-   */
+    * creating the cursor
+    */
     cursor = document.createElement('span');
   cursor
     .classList
@@ -60,10 +60,10 @@
 
   /**
    * @name setProps
-   * @description Set the ityped propertys configuration
-   * @param {Object} config The configuration propertys
+   * @description Set the ityped properties configuration
+   * @param {Object} config The configuration properties
    * @return {Promise}
-   */ 
+   */
   function setProps ( config ) {
     let props = config;
     props.strings    = config.strings    || ['Put you string here...', 'and Enjoy!']
@@ -81,12 +81,12 @@
   /**
    * @name init
    * @param {String} el The element that will receive the strings
-   * @param {Object} confing The initial configuration
+   * @param {Object} config The initial configuration
    */
   function init(element, config) {
     el = document.querySelector(element);
-    setProps(config).then(function(propertys){
-      props = propertys;
+    setProps(config).then(function(properties){
+      props = properties;
       let words = props.strings,
       len = words.length;
       loopingOnWords(words);
@@ -105,7 +105,7 @@
        * set the correct time
        * with the differences of type and back
        * speed
-       */ 
+       */
       if (props.backSpeed < props.typeSpeed) {
         time -= (props.typeSpeed - props.backSpeed) * word.length;
       } else if (props.typeSpeed - props.backSpeed) {
@@ -184,7 +184,7 @@
     })
   }
   /**
-   * @name interateInsideDecrement
+   * @name iterateInsideDecrement
    * @description Iterate on each word, inside the decrement function for decrement the word
    * @param {Element} span The Element that will receive the letters of word
    * @param {String} word The string that is the word
@@ -193,7 +193,7 @@
    * the decrement iteration are finished
    * @return {Promise}
    */
-  function interateInsideDecrement(span, word, len, resolve) {
+  function iterateInsideDecrement(span, word, len, resolve) {
     for (var i = len; i > 0; i--) {
       let iteratedI = i;
       let count = len;
@@ -228,10 +228,10 @@
           span.innerHTML = word;
         }
         else if (props.loop) {
-          interateInsideDecrement(span, word, len, resolve);
+          iterateInsideDecrement(span, word, len, resolve);
         }
       } else if (index + 1 !== lengthWords) {
-        interateInsideDecrement(span, word, len, resolve);
+        iterateInsideDecrement(span, word, len, resolve);
       }
     })
   }

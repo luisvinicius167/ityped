@@ -7,19 +7,19 @@
 ---
 
 <p align="center">
-  <img src="https://cdn.rawgit.com/luisvinicius167/ityped/master/img/itypedjs.gif" widt="400"/>
+  <img src="https://cdn.rawgit.com/luisvinicius167/ityped/master/img/itypedjs.gif" width="400"/>
 </p>
 
 [iTyped Website ➞](https://ityped.surge.sh/)
 
-Enter in any string, and watch it type at the speed you've set, backspace what it's typed, 
+Enter in any string, and watch it type at the speed you've set, backspace what it's typed,
 and begin a new sentence for however many strings you've set.
 
 ### Why should you use iTyped?
- * iTyped has a tiny size: 2.4kb.
+ * iTyped has a tiny size: 2.4kB
  * No jQuery dependency
  * Just install and enjoy!
- 
+
 At now, if you just need to render Strings, **iTyped** is the best solution for you.
 
 #### Install
@@ -34,13 +34,13 @@ CDN: `https://unpkg.com/ityped@0.0.4`
 import { init } from 'ityped';
 
 init(`#element`, {
-  // required - for now, only acceptting texts.
+  // required - for now, only accepting texts
     strings: ['Dead simple animated typing.', 'No dependencies'],
     //optional
     typeSpeed: 55, //default
     //optional
     backSpeed: 30, //default
-    //optional 
+    //optional
     startDelay: 500, //default
     //optional
     backDelay: 500, //default
@@ -48,7 +48,7 @@ init(`#element`, {
     loop: false //default
     //optional    
     cursorChar: "|", //default
-    // optional callback called when the last string was typed
+    // optional callback called once the last string has been typed
     onFinished: function(){},
 });
 ```
@@ -87,15 +87,15 @@ init(`#element`, {
 ### API
 
  Init
- 
+
 ```javascript
 /**
  * @name init
  * @description Init the typed animation
- * @param {String} element The Element that will be receive the strings
+ * @param {String} element The Element that will receive the strings
  * @param {Object} config The typed configuration
  */
- 
+
  init('#element', config);
 ```
 
@@ -118,17 +118,16 @@ iTyped Configuration
   * @param {Integer} backDelay Time before backspacing
   * @param {Integer} startDelay Time before typing starts
   * @param {Boolean} loop The animation loop
-  * @param {Function} onFinished The callback that will called if the 
-  * loop are false and when the last word are decremented
+  * @param {Function} onFinished The callback that will be called (if `loop` is false) once the last word is decremented
   **/
- 
+
   const config = {
     strings: ['Dead simple animated typing.', 'No dependencies'],
     //optional
     typeSpeed: 100, //default
     //optional
     backSpeed: 50, //default
-    //optional 
+    //optional
     startDelay: 500, //default
     //optional
     backDelay: 500, //default
@@ -136,8 +135,8 @@ iTyped Configuration
     loop: false //default
     //optional    
     cursorChar: "|", //default
-    // optional callback called when the last string was typed.
-    // and if the loop are false
+    // optional callback called (if `loop` is false) once the
+    // last string was typed
     onFinished: function(){},
   }
 ```
