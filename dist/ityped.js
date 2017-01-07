@@ -59,8 +59,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
   /**
    * @name setProps
-   * @description Set the ityped propertys configuration
-   * @param {Object} config The configuration propertys
+   * @description Set the ityped properties configuration
+   * @param {Object} config The configuration properties
    * @return {Promise}
    */
   function setProps(config) {
@@ -70,8 +70,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     props.backSpeed = config.backSpeed || 50;
     props.backDelay = config.backDelay || 500;
     props.startDelay = config.startDelay || 500;
-    props.showCursor = config.showCursor || true;
+    props.showCursor = config.showCursor;
     props.loop = config.loop || false;
+
+    if (props.showCursor === undefined) props.showCursor = true;
     if (props.showCursor) el.insertAdjacentElement('afterend', cursor);
     if (props.cursorChar !== undefined) cursor.textContent = props.cursorChar;
 
@@ -80,12 +82,12 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   /**
    * @name init
    * @param {String} el The element that will receive the strings
-   * @param {Object} confing The initial configuration
+   * @param {Object} config The initial configuration
    */
   function init(element, config) {
     el = document.querySelector(element);
-    setProps(config).then(function (propertys) {
-      props = propertys;
+    setProps(config).then(function (properties) {
+      props = properties;
       var words = props.strings,
           len = words.length;
       loopingOnWords(words);
@@ -185,7 +187,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     });
   }
   /**
-   * @name interateInsideDecrement
+   * @name iterateInsideDecrement
    * @description Iterate on each word, inside the decrement function for decrement the word
    * @param {Element} span The Element that will receive the letters of word
    * @param {String} word The string that is the word
@@ -194,7 +196,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    * the decrement iteration are finished
    * @return {Promise}
    */
-  function interateInsideDecrement(span, word, len, resolve) {
+  function iterateInsideDecrement(span, word, len, resolve) {
     var _loop2 = function _loop2() {
       var iteratedI = i;
       var count = len;
@@ -232,10 +234,10 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           }
           span.innerHTML = word;
         } else if (props.loop) {
-          interateInsideDecrement(span, word, len, resolve);
+          iterateInsideDecrement(span, word, len, resolve);
         }
       } else if (index + 1 !== lengthWords) {
-        interateInsideDecrement(span, word, len, resolve);
+        iterateInsideDecrement(span, word, len, resolve);
       }
     });
   }
