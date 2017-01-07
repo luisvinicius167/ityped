@@ -71,8 +71,10 @@
     props.backSpeed  = config.backSpeed  || 50;
     props.backDelay  = config.backDelay  || 500;
     props.startDelay = config.startDelay || 500;
-    props.showCursor = config.showCursor || true;
+    props.showCursor = config.showCursor;
     props.loop       = config.loop       || false;
+
+    if (props.showCursor === undefined) props.showCursor = true;
     if (props.showCursor) el.insertAdjacentElement('afterend', cursor)
     if (props.cursorChar !== undefined) cursor.textContent = props.cursorChar
 
