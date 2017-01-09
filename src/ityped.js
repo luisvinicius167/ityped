@@ -180,8 +180,7 @@
               });
           }, props.backDelay)
         });
-        // console.log(word, index, wordsLengthArray
-    })
+    });
   }
   /**
    * @name iterateInsideDecrement
