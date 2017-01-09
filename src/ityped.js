@@ -82,7 +82,7 @@
   }
   /**
    * @name init
-   * @param {String} el The element that will receive the strings
+   * @param {String} element The element that will receive the strings
    * @param {Object} config The initial configuration
    */
   function init(element, config) {
