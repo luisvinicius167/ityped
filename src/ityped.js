@@ -58,7 +58,7 @@
       cursorSpan.textContent = cursor;
       element.insertAdjacentElement('afterend', cursorSpan);
     }
-
+      
     typewrite(strings);
   }
 
