@@ -47,7 +47,7 @@
   /**
    * el is the element
    */
-  let el,
+  let selectedElement,
     props,
     /**
     * creating the cursor
@@ -75,7 +75,7 @@
     props.loop       = config.loop       || false;
 
     if (props.showCursor === undefined) props.showCursor = true;
-    if (props.showCursor) el.insertAdjacentElement('afterend', cursor);
+    if (props.showCursor) selectedElement.insertAdjacentElement('afterend', cursor);
     if (props.cursorChar !== undefined) cursor.textContent = props.cursorChar;
 
     return Promise.resolve(props);
@@ -86,11 +86,10 @@
    * @param {Object} config The initial configuration
    */
   function init(element, config) {
-    el = document.querySelector(element);
+    selectedElement = document.querySelector(element);
     setProps(config).then(function(properties){
       props = properties;
-      let words = props.strings;
-      loopingOnWords(words);
+      loopingOnWords(props.strings);
     })
   }
 
@@ -114,7 +113,7 @@
       }
       let done = this.async();
       let len = words.length;
-      iterateWords(el, word, index, len).then(function () {
+      iterateWords(selectedElement, word, index, len).then(function () {
         setTimeout(function () {
           done();
         }, time)
@@ -128,19 +127,19 @@
   /**
    * @name increment
    * @description Increment each letter and append it on element
-   * @param {Element} span The Element that will receive the letters
+   * @param {Element} selectedElement The Element that will receive the letters
    * @param {String} word The string that will be looped to
    * get each letter
    * @return {Promise}
    */
-  function increment(span, word) {
+  function increment(selectedElement, word) {
     return new Promise(function (resolve, reject) {
       for (let i = 0; i < word.length; i++) {
         count = 0;
         let wordIndex = i;
         let len = word.length;
         setTimeout(function (i) {
-          appendWord(span, word.charAt(wordIndex));
+          appendWord(selectedElement, word.charAt(wordIndex));
           count++;
           if (count === len - 1) {
             resolve();
@@ -152,28 +151,28 @@
   /**
    * @name appendWord
    * @description Append each letter on Element
-   * @param {Element} el The Element that will receive the letter
+   * @param {Element} selectedElement The Element that will receive the letter
    * @param {String} word The string that will be appended
    */
-  function appendWord(el, word) {
-    el.innerHTML += word;
+  function appendWord(selectedElement, word) {
+    selectedElement.innerHTML += word;
   }
 
   /**
    * @name iterateWords
    * @description Iterate on each word, incrementing and decrementing
-   * @param {Element} element The Element that will receive the letters of word
+   * @param {Element} selectedElement The Element that will receive the letters of word
    * @param {String} word The string that is the word
    * @param {Integer} index The index position of the words Array
    * @param {Integer} wordsLengthArray The length of words Array
    * @return {Promise}
    */
-  function iterateWords(element, word, index, wordsLengthArray) {
+  function iterateWords(selectedElement, word, index, wordsLengthArray) {
     return new Promise(function (resolve, reject) {
-      increment(element, word)
+      increment(selectedElement, word)
         .then(function () {
           setTimeout(function () {
-            decrement(element, word, index, wordsLengthArray)
+            decrement(selectedElement, word, index, wordsLengthArray)
               .then(function () {
                 setTimeout(function(){
                   resolve();
@@ -187,19 +186,18 @@
   /**
    * @name iterateInsideDecrement
    * @description Iterate on each word, inside the decrement function for decrement the word
-   * @param {Element} span The Element that will receive the letters of word
+   * @param {Element} selectedElement The Element that will receive the letters of word
    * @param {String} word The string that is the word
    * @param {Integer} len The length of words Array
    * @param {Promise} resolve The Promise.resolve method that will be trigerred when
    * the decrement iteration are finished
    * @return {Promise}
    */
-  function iterateInsideDecrement(span, word, len, resolve) {
-    for (var i = len; i > 0; i--) {
-      let iteratedI = i;
-      let count = len;
+  function iterateInsideDecrement(selectedElement, word, len, resolve) {
+    for (let i = len; i > 0; i--) {
+      let iteratedI = i, count = len;
       setTimeout(function (i) {
-        span.innerHTML = word.substring(0, len - iteratedI)
+        selectedElement.innerHTML = word.substring(0, len - iteratedI)
         count--;
         if (iteratedI === 1) {
           resolve();
@@ -211,12 +209,12 @@
   /**
    * @name decrement
    * @description decrement the word in the correct case
-   * @param {Element} span The Element that will receive the letters of word
+   * @param {Element} selectedElement The Element that will receive the letters of word
    * @param {String} word The string that is the word
    * @param {Integer} index The index of the Array that contain the word
    * @param {Integer} lengthWords The length of words Array
    */
-  function decrement(span, word, index, lengthWords) {
+  function decrement(selectedElement, word, index, lengthWords) {
     return new Promise(function (resolve, reject) {
       let len = word.length;
       // if is the last letter and the last word and no loop
@@ -226,13 +224,13 @@
           if (props.onFinished !== undefined && typeof props.onFinished === "function"){
               props.onFinished();
           }
-          span.innerHTML = word;
+          selectedElement.innerHTML = word;
         }
         else if (props.loop) {
-          iterateInsideDecrement(span, word, len, resolve);
+          iterateInsideDecrement(selectedElement, word, len, resolve);
         }
       } else if (index + 1 !== lengthWords) {
-        iterateInsideDecrement(span, word, len, resolve);
+        iterateInsideDecrement(selectedElement, word, len, resolve);
       }
     })
   }
