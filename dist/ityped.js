@@ -81,15 +81,14 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   }
   /**
    * @name init
-   * @param {String} el The element that will receive the strings
+   * @param {String} element The element that will receive the strings
    * @param {Object} config The initial configuration
    */
   function init(element, config) {
     el = document.querySelector(element);
     setProps(config).then(function (properties) {
       props = properties;
-      var words = props.strings,
-          len = words.length;
+      var words = props.strings;
       loopingOnWords(words);
     });
   }
@@ -109,7 +108,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
        */
       if (props.backSpeed < props.typeSpeed) {
         time -= (props.typeSpeed - props.backSpeed) * word.length;
-      } else if (props.typeSpeed - props.backSpeed) {
+      } else if (props.backSpeed > props.typeSpeed) {
         time += (props.backSpeed - props.typeSpeed) * word.length;
       }
       var done = this.async();
