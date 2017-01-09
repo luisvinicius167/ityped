@@ -89,8 +89,7 @@
     el = document.querySelector(element);
     setProps(config).then(function(properties){
       props = properties;
-      let words = props.strings,
-      len = words.length;
+      let words = props.strings;
       loopingOnWords(words);
     })
   }
@@ -102,7 +101,7 @@
    */
   function loopingOnWords(words) {
     forEach(words, function (word, index, arr) {
-      let time = (props.typeSpeed * word.length - 1)
+      let time = (props.typeSpeed * word.length - 1);
       /**
        * set the correct time
        * with the differences of type and back
@@ -110,7 +109,7 @@
        */
       if (props.backSpeed < props.typeSpeed) {
         time -= (props.typeSpeed - props.backSpeed) * word.length;
-      } else if (props.typeSpeed - props.backSpeed) {
+      } else if (props.backSpeed > props.typeSpeed) {
         time += (props.backSpeed - props.typeSpeed) * word.length;
       }
       let done = this.async();
