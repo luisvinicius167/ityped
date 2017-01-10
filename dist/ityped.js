@@ -21,28 +21,26 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    * async foreach
    * https://www.npmjs.com/package/async-foreach
    */
-  (function (a) {
-    a.forEach = function (a, b, c) {
-      var d = -1,
-          e = a.length >>> 0;
-      (function f(g) {
-        var h,
-            j = g === !1;
-        do {
-          ++d;
-        } while (!(d in a) && d !== e);
-        if (j || d === e) {
-          c && c(!j, a);
-          return;
+  var forEach = function forEach(a, b, c) {
+    var d = -1,
+        e = a.length >>> 0;
+    (function f(g) {
+      var h,
+          j = g === !1;
+      do {
+        ++d;
+      } while (!(d in a) && d !== e);
+      if (j || d === e) {
+        c && c(!j, a);
+        return;
+      }
+      g = b.call({
+        async: function async() {
+          return h = !0, f;
         }
-        g = b.call({
-          async: function async() {
-            return h = !0, f;
-          }
-        }, a[d], d, a), h || f(g);
-      })();
-    };
-  })((typeof exports === "undefined" ? "undefined" : _typeof(exports)) == "object" && exports || global);
+      }, a[d], d, a), h || f(g);
+    })();
+  };
 
   /**
    * el is the element

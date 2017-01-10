@@ -19,8 +19,7 @@
    * async foreach
    * https://www.npmjs.com/package/async-foreach
    */
-  (function (a) {
-    a.forEach = function (a, b, c) {
+    const forEach = function (a, b, c) {
       var d = -1,
         e = a.length >>> 0;
       (function f(g) {
@@ -40,9 +39,9 @@
           }
         }, a[d], d, a),
         h || f(g)
-      })()
-    }
-  })(typeof exports == "object" && exports || global);
+      })();
+    };
+
 
   /**
    * el is the element
