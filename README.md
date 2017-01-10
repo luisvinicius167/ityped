@@ -16,7 +16,7 @@ Enter in any string, and watch it type at the speed you've set, backspace what i
 and begin a new sentence for however many strings you've set.
 
 ## Why should you use iTyped?
- * iTyped has a tiny size: 2.4kB
+ * iTyped has a tiny size: 2.2kB
  * No jQuery dependency
  * Just install and enjoy!
 
