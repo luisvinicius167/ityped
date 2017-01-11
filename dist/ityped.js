@@ -63,7 +63,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
    */
   function setProps(config) {
     var props = config;
-    props.strings = config.strings || ['Put you string here...', 'and Enjoy!'];
+    props.strings = config.strings || ['Put your string here...', 'and Enjoy!'];
     props.typeSpeed = config.typeSpeed || 100;
     props.backSpeed = config.backSpeed || 50;
     props.backDelay = config.backDelay || 500;
