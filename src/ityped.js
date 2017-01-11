@@ -65,7 +65,7 @@
    */
   function setProps ( config ) {
     let props = config;
-    props.strings    = config.strings    || ['Put you string here...', 'and Enjoy!']
+    props.strings    = config.strings    || ['Put your string here...', 'and Enjoy!']
     props.typeSpeed  = config.typeSpeed  || 100;
     props.backSpeed  = config.backSpeed  || 50;
     props.backDelay  = config.backDelay  || 500;
