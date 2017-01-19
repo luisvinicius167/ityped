@@ -26,7 +26,7 @@ At now, if you just need to render Strings, **iTyped** is the best solution for 
 #### Install
 
 Npm: `npm install ityped` </br>
-CDN: `https://unpkg.com/ityped@0.0.7`
+CDN: `https://unpkg.com/ityped@0.0.8`
 
 
 #### The Gist:
