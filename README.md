@@ -1,6 +1,6 @@
 # iTyped
 
-[![npm package](https://img.shields.io/badge/npm-v0.0.7-lightgray.svg)](https://www.npmjs.com/package/ityped)
+[![npm package](https://img.shields.io/badge/npm-v0.0.8-lightgray.svg)](https://www.npmjs.com/package/ityped)
 
 > Dead simple Animated typing, with no dependencies.
 
@@ -16,7 +16,7 @@ Enter in any string, and watch it type at the speed you've set, backspace what i
 and begin a new sentence for however many strings you've set.
 
 ## Why should you use iTyped?
- * iTyped has a tiny size: 2.2kB
+ * iTyped has a tiny size: 2.3kB
  * No jQuery dependency
  * Just install and enjoy!
 
@@ -95,10 +95,13 @@ init(`#element`, {
 /**
  * @name init
  * @description Init the typed animation
- * @param {String} element The Element that will receive the strings
+ * @param {String || Element } element The Element that will receive the strings
  * @param {Object} config The typed configuration
  */
-
+ const element = document.querySelector('#element')
+ // you can
+ init(element, config);
+ // or
  init('#element', config);
 ```
 
@@ -128,15 +131,15 @@ iTyped Configuration
   const config = {
     strings: ['Dead simple animated typing.', 'No dependencies'],
     //optional
-    typeSpeed: 100, //default
+    typeSpeed:  100, //default
     //optional
-    backSpeed: 50, //default
+    backSpeed:  50, //default
     //optional
     startDelay: 500, //default
     //optional
-    backDelay: 500, //default
+    backDelay:  500, //default
     //optional    
-    loop: false, //default
+    loop:       false, //default
     //optional
     showCursor: true, //default
     //optional    
