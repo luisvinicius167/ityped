@@ -81,11 +81,13 @@
   }
   /**
    * @name init
-   * @param {String} element The element that will receive the strings
+   * @param { String || Element } element The element that will receive the strings
    * @param {Object} config The initial configuration
    */
   function init(element, config) {
-    selectedElement = document.querySelector(element);
+    typeof element === 'string' 
+      ? selectedElement = document.querySelector(element)
+      : selectedElement = element;
     setProps(config).then(function(properties){
       props = properties;
       loopingOnWords(props.strings);
