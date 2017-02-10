@@ -32,7 +32,7 @@ CDN: `https://unpkg.com/ityped@0.0.9`
 #### The Gist:
 
 ```javascript
-import { init } from 'ityped';
+import { init, destroy } from 'ityped';
 
 init(`#element`, {
   // required - for now, only accepting texts
