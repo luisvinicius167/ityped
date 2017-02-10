@@ -9,7 +9,8 @@
     define([], factory);
   } else if (typeof exports === "object") {
     module.exports = {
-      init: factory.init
+      init: factory.init,
+      destroy: factory.destroy
     }
   } else {
     root.ityped = factory;
@@ -236,7 +237,15 @@
   }
 
   /**
+   * @name destroy
+   * @description destroy the onFinished function
+   */ 
+  function destroy () {
+    props.onFinished = function(){return void 0};
+  }
+
+  /**
    * Return the init function
    */
-  return {init}
+  return {init, destroy}
 }(this)));

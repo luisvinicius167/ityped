@@ -11,7 +11,8 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     define([], factory);
   } else if ((typeof exports === "undefined" ? "undefined" : _typeof(exports)) === "object") {
     module.exports = {
-      init: factory.init
+      init: factory.init,
+      destroy: factory.destroy
     };
   } else {
     root.ityped = factory;
@@ -238,8 +239,18 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
   }
 
   /**
+   * @name destroy
+   * @description destroy the onFinished function
+   */
+  function destroy() {
+    props.onFinished = function () {
+      return void 0;
+    };
+  }
+
+  /**
    * Return the init function
    */
-  return { init: init };
+  return { init: init, destroy: destroy };
 }(this));
 //# sourceMappingURL=ityped.js.map
