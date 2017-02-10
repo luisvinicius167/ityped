@@ -116,7 +116,7 @@ init(`#element`, {
 ```javascript
 /**
  * @name destroy
- * @description Destrou the onFinished function
+ * @description Destroy the onFinished function
  */
 
  destroy();
