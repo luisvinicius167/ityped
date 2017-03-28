@@ -117,6 +117,7 @@ init(`#element`, {
 /**
  * @name destroy
  * @description Destroy the onFinished function
+ * @param  {HTMLElement}  element   The element on which the ityped animation is applied
  */
 
  destroy();

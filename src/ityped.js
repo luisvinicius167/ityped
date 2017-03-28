@@ -53,10 +53,8 @@
     * creating the cursor
     */
     cursor = document.createElement('span');
-  cursor
-    .classList
-    .add('ityped-cursor');
-  cursor.textContent = '|';
+  	cursor.classList.add('ityped-cursor');
+  	cursor.textContent = '|';
 
   /**
    * @name setProps
@@ -75,8 +73,6 @@
     props.loop       = config.loop       || false;
 
     if (props.showCursor === undefined) props.showCursor = true;
-    if (props.showCursor) selectedElement.insertAdjacentElement('afterend', cursor);
-    if (props.cursorChar !== undefined) cursor.textContent = props.cursorChar;
 
     return Promise.resolve(props);
   }
@@ -86,152 +82,164 @@
    * @param {Object} config The initial configuration
    */
   function init(element, config) {
-    typeof element === 'string' 
-      ? selectedElement = document.querySelector(element)
-      : selectedElement = element;
+    typeof element === 'string'
+      ? element = document.querySelector(element)
+      : element = element;
     setProps(config).then(function(properties){
       props = properties;
-      loopingOnWords(props.strings);
+      element._props = props;
+	  // init cursor if needed
+	  if (props.showCursor) {
+          initCursorOn(element, props.cursorChar || '|');
+	  }
+      loopingOnWords(element);
     })
+  }
+
+  function initCursorOn(element, cursorChar) {
+      const newCursor = cursor.cloneNode();
+	  element.insertAdjacentElement('afterend', newCursor);
+      newCursor.textContent = cursorChar;
   }
 
   /**
    * @name loopingOnWords
    * @description Loop on each string passed
+   * @param {HTMLElement} 	element 	The element to handle the animation on
    * @param {Array} words The array that contain the words
    */
-  function loopingOnWords(words) {
-    forEach(words, function (word, index, arr) {
-      let time = (props.typeSpeed * word.length - 1);
+  function loopingOnWords(element) {
+    forEach(element._props.strings, function (word, index, arr) {
+      let time = (element._props.typeSpeed * word.length - 1);
       /**
        * set the correct time
        * with the differences of type and back
        * speed
        */
-      if (props.backSpeed < props.typeSpeed) {
-        time -= (props.typeSpeed - props.backSpeed) * word.length;
-      } else if (props.backSpeed > props.typeSpeed) {
-        time += (props.backSpeed - props.typeSpeed) * word.length;
+      if (element._props.backSpeed < element._props.typeSpeed) {
+        time -= (element._props.typeSpeed - element._props.backSpeed) * word.length;
+    } else if (element._props.backSpeed > element._props.typeSpeed) {
+        time += (element._props.backSpeed - element._props.typeSpeed) * word.length;
       }
       let done = this.async();
-      let len = words.length;
-      iterateWords(selectedElement, word, index, len).then(function () {
+      let len = element._props.strings.length;
+      iterateWords(element, word, index, len).then(function () {
         setTimeout(function () {
           done();
         }, time)
       })
     }, function () {
-      if (props.loop) {
-        loopingOnWords(words);
+      if (element._props.loop) {
+        loopingOnWords(element);
       }
     });
   }
   /**
    * @name increment
    * @description Increment each letter and append it on element
-   * @param {Element} selectedElement The Element that will receive the letters
+   * @param {Element} element The Element that will receive the letters
    * @param {String} word The string that will be looped to
    * get each letter
    * @return {Promise}
    */
-  function increment(selectedElement, word) {
+  function increment(element, word) {
     return new Promise(function (resolve, reject) {
+        let count = 0;
       for (let i = 0; i < word.length; i++) {
-        count = 0;
         let wordIndex = i;
         let len = word.length;
         setTimeout(function (i) {
-          appendWord(selectedElement, word.charAt(wordIndex));
+          appendWord(element, word.charAt(wordIndex));
           count++;
           if (count === len - 1) {
             resolve();
           }
-        }, props.typeSpeed * i);
+        }, element._props.typeSpeed * i);
       }
     })
   }
   /**
    * @name appendWord
    * @description Append each letter on Element
-   * @param {Element} selectedElement The Element that will receive the letter
+   * @param {Element} element The Element that will receive the letter
    * @param {String} word The string that will be appended
    */
-  function appendWord(selectedElement, word) {
-    selectedElement.innerHTML += word;
+  function appendWord(element, word) {
+    element.innerHTML += word;
   }
 
   /**
    * @name iterateWords
    * @description Iterate on each word, incrementing and decrementing
-   * @param {Element} selectedElement The Element that will receive the letters of word
+   * @param {Element} element The Element that will receive the letters of word
    * @param {String} word The string that is the word
    * @param {Integer} index The index position of the words Array
    * @param {Integer} wordsLengthArray The length of words Array
    * @return {Promise}
    */
-  function iterateWords(selectedElement, word, index, wordsLengthArray) {
+  function iterateWords(element, word, index, wordsLengthArray) {
     return new Promise(function (resolve, reject) {
-      increment(selectedElement, word)
+      increment(element, word)
         .then(function () {
           setTimeout(function () {
-            decrement(selectedElement, word, index, wordsLengthArray)
+            decrement(element, word, index, wordsLengthArray)
               .then(function () {
                 setTimeout(function(){
                   resolve();
-                }, props.startDelay)
+                }, element._props.startDelay)
               });
-          }, props.backDelay)
+          }, element._props.backDelay)
         });
     });
   }
   /**
    * @name iterateInsideDecrement
    * @description Iterate on each word, inside the decrement function for decrement the word
-   * @param {Element} selectedElement The Element that will receive the letters of word
+   * @param {Element} element The Element that will receive the letters of word
    * @param {String} word The string that is the word
    * @param {Integer} len The length of words Array
    * @param {Promise} resolve The Promise.resolve method that will be trigerred when
    * the decrement iteration are finished
    * @return {Promise}
    */
-  function iterateInsideDecrement(selectedElement, word, len, resolve) {
+  function iterateInsideDecrement(element, word, len, resolve) {
     for (let i = len; i > 0; i--) {
       let iteratedI = i, count = len;
       setTimeout(function (i) {
-        selectedElement.innerHTML = word.substring(0, len - iteratedI)
+        element.innerHTML = word.substring(0, len - iteratedI)
         count--;
         if (iteratedI === 1) {
           resolve();
         }
-      }, props.backSpeed * i);
+      }, element._props.backSpeed * i);
     }
   }
 
   /**
    * @name decrement
    * @description decrement the word in the correct case
-   * @param {Element} selectedElement The Element that will receive the letters of word
+   * @param {Element} element The Element that will receive the letters of word
    * @param {String} word The string that is the word
    * @param {Integer} index The index of the Array that contain the word
    * @param {Integer} lengthWords The length of words Array
    */
-  function decrement(selectedElement, word, index, lengthWords) {
+  function decrement(element, word, index, lengthWords) {
     return new Promise(function (resolve, reject) {
       let len = word.length;
       // if is the last letter and the last word and no loop
       if (index + 1 === lengthWords) {
-        if (!props.loop) {
+        if (!element._props.loop) {
         // when the last word
-          if (props.onFinished !== undefined && typeof props.onFinished === "function"){
-              props.onFinished();
+          if (element._props.onFinished !== undefined && typeof element._props.onFinished === "function"){
+              element._props.onFinished();
           }
-          selectedElement.innerHTML = word;
+          element.innerHTML = word;
         }
-        else if (props.loop) {
-          iterateInsideDecrement(selectedElement, word, len, resolve);
+        else if (element._props.loop) {
+          iterateInsideDecrement(element, word, len, resolve);
         }
       } else if (index + 1 !== lengthWords) {
-        iterateInsideDecrement(selectedElement, word, len, resolve);
+        iterateInsideDecrement(element, word, len, resolve);
       }
     })
   }
@@ -239,9 +247,9 @@
   /**
    * @name destroy
    * @description destroy the onFinished function
-   */ 
-  function destroy () {
-    props.onFinished = function(){return void 0};
+   */
+  function destroy (element) {
+    element._props.onFinished = function(){return void 0};
   }
 
   /**
