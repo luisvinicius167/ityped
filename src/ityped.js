@@ -49,12 +49,21 @@
    */
   let selectedElement,
     props,
-    /**
-    * creating the cursor
-    */
-    cursor = document.createElement('span');
-  	cursor.classList.add('ityped-cursor');
-  	cursor.textContent = '|';
+    cursor;
+
+  /**
+   * @name generateCursor
+   * @description generates a cursor DOM node
+   * @return {HTMLSpanElement}
+  */
+  function generateCursor () {
+    if (!cursor) {
+      cursor = document.createElement('span');
+    	cursor.classList.add('ityped-cursor');
+    	cursor.textContent = '|';
+    }
+    return cursor.cloneNode();
+  }
 
   /**
    * @name setProps
@@ -97,7 +106,7 @@
   }
 
   function initCursorOn(element, cursorChar) {
-      const newCursor = cursor.cloneNode();
+      const newCursor = generateCursor();
 	  element.insertAdjacentElement('afterend', newCursor);
       newCursor.textContent = cursorChar;
   }
