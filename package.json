@@ -1,6 +1,6 @@
 {
   "name": "ityped",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Dead simple Animated typing, with no dependencies.",
   "main": "dist/ityped.min.js",
   "scripts": {
