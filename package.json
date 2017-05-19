@@ -2,20 +2,30 @@
   "name": "ityped",
   "version": "0.0.10",
   "description": "Dead simple Animated typing, with no dependencies.",
-  "main": "dist/ityped.min.js",
-  "scripts": {
-    "build": "grunt",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "main": "dist/ityped.js",
+  "module": "src/ityped.js",
   "author": "Luis Vinicius <luis@startamus.com.br>",
   "license": "MIT",
+  "scripts": {
+    "prebuild": "npm run clean",
+    "build": "npm run rollup & npm run rollup:production",
+    "build:watch": "npm run rollup -- --watch",
+    "clean": "del-cli \"dist/**/*\"",
+    "rollup": "rollup --config",
+    "rollup:production": "cross-env NODE_ENV=production npm run rollup",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "devDependencies": {
-    "babel-plugin-transform-object-assign": "^6.8.0",
-    "babel-preset-es2015-script": "^1.1.0",
-    "grunt": "latest",
-    "grunt-babel": "^6.0.0",
-    "grunt-contrib-uglify": "^2.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "time-grunt": "^1.4.0"
+    "babel-preset-env": "~1.4.0",
+    "cross-env": "~5.0.0",
+    "del-cli": "~1.0.0",
+    "rollup": "~0.41.6",
+    "rollup-plugin-babel": "~2.7.1",
+    "rollup-plugin-uglify": "~2.0.0",
+    "rollup-watch": "~3.2.2"
   }
 }
