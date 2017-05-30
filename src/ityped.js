@@ -53,8 +53,8 @@
     * creating the cursor
     */
     cursor = document.createElement('span');
-  	cursor.classList.add('ityped-cursor');
-  	cursor.textContent = '|';
+    cursor.classList.add('ityped-cursor');
+    cursor.textContent = '|';
 
   /**
    * @name setProps
@@ -68,6 +68,7 @@
     props.typeSpeed  = config.typeSpeed  || 100;
     props.backSpeed  = config.backSpeed  || 50;
     props.backDelay  = config.backDelay  || 500;
+    props.backTyping = typeof config.backTyping === 'undefined' ? true : config.backTyping;
     props.startDelay = config.startDelay || 500;
     props.showCursor = config.showCursor;
     props.loop       = config.loop       || false;
@@ -88,24 +89,24 @@
     setProps(config).then(function(properties){
       props = properties;
       element._props = props;
-	  // init cursor if needed
-	  if (props.showCursor) {
-          initCursorOn(element, props.cursorChar || '|');
-	  }
+    // init cursor if needed
+    if (props.showCursor) {
+          initCursorOn(element, props.cursorChar || '|');
+    }
       loopingOnWords(element);
     })
   }
 
   function initCursorOn(element, cursorChar) {
       const newCursor = cursor.cloneNode();
-	  element.insertAdjacentElement('afterend', newCursor);
+    element.insertAdjacentElement('afterend', newCursor);
       newCursor.textContent = cursorChar;
   }
 
   /**
    * @name loopingOnWords
    * @description Loop on each string passed
-   * @param {HTMLElement} 	element 	The element to handle the animation on
+   * @param {HTMLElement}   element   The element to handle the animation on
    * @param {Array} words The array that contain the words
    */
   function loopingOnWords(element) {
@@ -181,14 +182,21 @@
     return new Promise(function (resolve, reject) {
       increment(element, word)
         .then(function () {
+          if (element._props.backTyping) {
+            setTimeout(function () {
+              decrement(element, word, index, wordsLengthArray)
+                .then(function () {
+                  setTimeout(function(){
+                    resolve();
+                  }, element._props.startDelay)
+                });
+            }, element._props.backDelay)
+          } else {
           setTimeout(function () {
-            decrement(element, word, index, wordsLengthArray)
-              .then(function () {
-                setTimeout(function(){
-                  resolve();
-                }, element._props.startDelay)
-              });
-          }, element._props.backDelay)
+              element.innerHTML = "";
+                resolve();
+              }, element._props.startDelay);
+          }
         });
     });
   }
