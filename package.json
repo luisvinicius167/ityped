@@ -1,13 +1,12 @@
 {
-  "name": "ityped",
-  "version": "0.0.10",
+  "name": "ityped2",
+  "version": "0.1.0",
   "description": "Dead simple Animated typing, with no dependencies.",
   "files": [
     "dist",
     "src"
   ],
   "main": "dist/ityped.js",
-  "module": "src/ityped.js",
   "author": "Luis Vinicius <luis@startamus.com.br>",
   "license": "MIT",
   "scripts": {

@@ -1,2 +1,3 @@
-/node_modules
-/webpage
+node_modules/
+webpage/
+.idea/
