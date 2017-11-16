@@ -51,6 +51,8 @@ init(`#element`, {
     showCursor: true, //default
     //optional    
     cursorChar: "|", //default
+    //optional
+    cursorClass: 'ityped-cursor', //default
     // optional callback called once the last string has been typed
     onFinished: function(){}
 });
