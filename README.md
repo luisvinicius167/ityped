@@ -1,4 +1,4 @@
-# iTyped
+# ityped2
 
 [![License MIT](https://img.shields.io/npm/l/ityped2.svg)](https://github.com/zhuweiyou/ityped2/blob/master/LICENSE)
 [![NPM Version](https://img.shields.io/npm/v/ityped2.svg)](https://www.npmjs.com/package/ityped2)
@@ -8,27 +8,20 @@
 
 ---
 
-<p align="center">
-  <img src="https://cdn.rawgit.com/luisvinicius167/ityped/master/img/itypedjs.gif" width="400"/>
-</p>
-
-[iTyped Website ➞](https://ityped.surge.sh/)
-
 Enter in any string, and watch it type at the speed you've set, backspace what it's typed,
 and begin a new sentence for however many strings you've set.
 
-## Why should you use iTyped?
+## Why should you use iTyped2?
  * iTyped has a tiny size: 2.3kB
  * No jQuery dependency
  * Just install and enjoy!
 
-At now, if you just need to render Strings, **iTyped** is the best solution for you.
+At now, if you just need to render Strings, **iTyped2** is the best solution for you.
 
 
 #### Install
 
 Npm: `npm install ityped2` </br>
-CDN: `https://unpkg.com/ityped2@0.1.0`
 
 
 #### The Gist:
