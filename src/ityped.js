@@ -35,7 +35,6 @@ let selectedElement,
   * creating the cursor
   */
   cursor = document.createElement('span');
-  cursor.classList.add('ityped-cursor');
   cursor.textContent = '|';
 
 /**
@@ -46,13 +45,14 @@ let selectedElement,
  */
 function setProps ( config ) {
   let props = config;
-  props.strings    = config.strings    || ['Put your string here...', 'and Enjoy!']
-  props.typeSpeed  = config.typeSpeed  || 100;
-  props.backSpeed  = config.backSpeed  || 50;
-  props.backDelay  = config.backDelay  || 500;
-  props.startDelay = config.startDelay || 500;
-  props.showCursor = config.showCursor;
-  props.loop       = config.loop       || false;
+  props.strings     = config.strings     || ['Put your string here...', 'and Enjoy!']
+  props.typeSpeed   = config.typeSpeed   || 100;
+  props.backSpeed   = config.backSpeed   || 50;
+  props.backDelay   = config.backDelay   || 500;
+  props.startDelay  = config.startDelay  || 500;
+  props.showCursor  = config.showCursor;
+  props.cursorClass = config.cursorClass || 'ityped-cursor';
+  props.loop        = config.loop        || false;
 
   if (props.showCursor === undefined) props.showCursor = true;
 
@@ -71,16 +71,17 @@ function init(element, config) {
     props = properties;
     element._props = props;
   // init cursor if needed
-  if (props.showCursor) {
-        initCursorOn(element, props.cursorChar || '|');
-  }
+    if (props.showCursor) {
+      initCursorOn(element, props.cursorClass, props.cursorChar || '|');
+    }
     loopingOnWords(element);
   })
 }
 
-function initCursorOn(element, cursorChar) {
+function initCursorOn(element, cursorClass, cursorChar) {
     const newCursor = cursor.cloneNode();
-  element.insertAdjacentElement('afterend', newCursor);
+    newCursor.classList.add(cursorClass);
+    element.insertAdjacentElement('afterend', newCursor);
     newCursor.textContent = cursorChar;
 }
 
