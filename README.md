@@ -1,33 +1,38 @@
-# ityped2
+# iTyped
 
-[![License MIT](https://img.shields.io/npm/l/ityped2.svg)](https://github.com/zhuweiyou/ityped2/blob/master/LICENSE)
-[![NPM Version](https://img.shields.io/npm/v/ityped2.svg)](https://www.npmjs.com/package/ityped2)
-[![NPM Download](https://img.shields.io/npm/dt/ityped2.svg)](https://www.npmjs.com/package/ityped2)
+[![npm package](https://img.shields.io/badge/npm-v0.0.10-lightgray.svg)](https://www.npmjs.com/package/ityped)
 
 > Dead simple Animated typing, with no dependencies.
 
 ---
 
+<p align="center">
+  <img src="https://cdn.rawgit.com/luisvinicius167/ityped/master/img/itypedjs.gif" width="400"/>
+</p>
+
+[iTyped Website ➞](https://ityped.surge.sh/)
+
 Enter in any string, and watch it type at the speed you've set, backspace what it's typed,
 and begin a new sentence for however many strings you've set.
 
-## Why should you use iTyped2?
+## Why should you use iTyped?
  * iTyped has a tiny size: 2.3kB
  * No jQuery dependency
  * Just install and enjoy!
 
-At now, if you just need to render Strings, **iTyped2** is the best solution for you.
+At now, if you just need to render Strings, **iTyped** is the best solution for you.
 
 
 #### Install
 
-Npm: `npm install ityped2` </br>
+Npm: `npm install ityped` </br>
+CDN: `https://unpkg.com/ityped@0.0.10`
 
 
 #### The Gist:
 
 ```javascript
-import { init, destroy } from 'ityped2';
+import { init, destroy } from 'ityped';
 
 init(`#element`, {
   // required - for now, only accepting texts
@@ -46,8 +51,6 @@ init(`#element`, {
     showCursor: true, //default
     //optional    
     cursorChar: "|", //default
-    //optional
-    cursorClass: 'ityped-cursor', //default
     // optional callback called once the last string has been typed
     onFinished: function(){}
 });
@@ -120,7 +123,7 @@ init(`#element`, {
  destroy();
 ```
 
-iTyped2 Configuration
+iTyped Configuration
 
 ```javascript
 /**
@@ -153,8 +156,6 @@ iTyped2 Configuration
     showCursor: true, //default
     //optional    
     cursorChar: "|", //default
-    //optional
-    cursorClass: 'ityped-cursor', //default
     // optional callback called (if `loop` is false) once the
     // last string was typed
     onFinished: function(){},
