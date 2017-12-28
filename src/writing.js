@@ -1,5 +1,4 @@
 const typeString = (word, i, el, props) => {
-  console.log(word, word.length , i)
   if (i === word.length - 1) {
     window.setTimeout(() => {
       let k = 0
@@ -44,7 +43,6 @@ const writeString = (el, position, props, time) => {
 
 export const start = (element, props) => {
   const times = []
-  console.log(props)
   const { strings, startDelay, typeSpeed, backSpeed, backDelay, loop } = props
   const arrLen = strings.length
   for (let i = 0; i < arrLen; i++) {
