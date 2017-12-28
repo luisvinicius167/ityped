@@ -1,0 +1,34 @@
+{
+  "name": "ityped",
+  "version": "1.0.0",
+  "description": "Dead simple Javascript animated typing, with no dependencies.",
+  "main": "dist/ityped.js",
+  "module": "src/ityped.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "scripts": {
+    "prebuild": "npm run clean",
+    "build": "npm run rollup & npm run rollup:production",
+    "build:watch": "npm run rollup -- --watch",
+    "clean": "del-cli \"dist/**/*\"",
+    "rollup": "rollup --config",
+    "rollup:production": "cross-env NODE_ENV=production npm run rollup",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1",
+    "cross-env": "^5.1.3",
+    "del-cli": "^1.1.0",
+    "rollup": "^0.53.0",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-uglify": "^2.0.1",
+    "rollup-watch": "^4.3.1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.26.0"
+  }
+}
