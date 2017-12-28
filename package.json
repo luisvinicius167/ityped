@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "prebuild": "npm run clean",
+    "pre:commit": "yarn build",
     "build": "npm run rollup & npm run rollup:production",
     "build:watch": "npm run rollup -- --watch",
     "clean": "del-cli \"dist/**/*\"",
