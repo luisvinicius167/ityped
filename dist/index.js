@@ -29,6 +29,8 @@ var setProps = function setProps(_ref) {
       startDelay = _ref$startDelay === undefined ? 500 : _ref$startDelay,
       _ref$cursorChar = _ref.cursorChar,
       cursorChar = _ref$cursorChar === undefined ? '|' : _ref$cursorChar,
+      _ref$placeholder = _ref.placeholder,
+      placeholder = _ref$placeholder === undefined ? false : _ref$placeholder,
       _ref$showCursor = _ref.showCursor,
       showCursor = _ref$showCursor === undefined ? true : _ref$showCursor,
       _ref$disableBackTypin = _ref.disableBackTyping,
@@ -43,6 +45,7 @@ var setProps = function setProps(_ref) {
     backSpeed: backSpeed,
     cursorChar: cursorChar,
     backDelay: backDelay,
+    placeholder: placeholder,
     startDelay: startDelay,
     showCursor: showCursor,
     loop: loop,
@@ -94,7 +97,8 @@ var typeString = function typeString(word, i, el, props) {
       }
     }, props.backDelay);
   }
-  el.innerHTML += word[i];
+
+  props.placeholder ? el.placeholder += word[i] : el.innerHTML += word[i];
 };
 
 var isLastLetterOfLastString = function isLastLetterOfLastString(word, props) {
@@ -102,7 +106,8 @@ var isLastLetterOfLastString = function isLastLetterOfLastString(word, props) {
 };
 
 var eraseString = function eraseString(i, el, props, word) {
-  el.innerHTML = el.innerHTML.substring(0, --i);
+  props.placeholder ? el.placeholder = el.placeholder.substring(0, --i) : el.innerHTML = el.innerHTML.substring(0, --i);
+
   if (i === 0 && isLastLetterOfLastString(word, props) && props.loop) {
     start(el, props);
   } else if (isLastLetterOfLastString(word, props) && !props.loop) {

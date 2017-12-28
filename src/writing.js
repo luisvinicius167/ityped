@@ -11,14 +11,18 @@ const typeString = (word, i, el, props) => {
       }
     }, props.backDelay)
   }
-  el.innerHTML += word[i]
+
+  props.placeholder ? el.placeholder += word[i] : el.innerHTML += word[i]
 }
 
 const isLastLetterOfLastString = (word, props) => 
   props.strings.indexOf(word) === props.strings.length - 1
 
 const eraseString = (i, el, props, word) => {
-  el.innerHTML = el.innerHTML.substring(0, --i)
+  props.placeholder 
+    ? el.placeholder = el.placeholder.substring(0, --i)
+    : el.innerHTML = el.innerHTML.substring(0, --i)
+
   if (i === 0
     && isLastLetterOfLastString(word, props)
     && props.loop

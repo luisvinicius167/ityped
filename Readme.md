@@ -1,6 +1,6 @@
 # iTyped
 
-[![npm package](https://img.shields.io/badge/npm-v1.0.0-lightgray.svg)](https://www.npmjs.com/package/ityped)
+[![npm package](https://img.shields.io/badge/npm-v1.0.1-lightgray.svg)](https://www.npmjs.com/package/ityped)
 
 > Dead simple Animated typing, with no dependencies.
 
@@ -16,9 +16,10 @@ Enter in any string, and watch it type at the speed you've set, backspace what i
 and begin a new sentence for however many strings you've set.
 
 ## Why should you use iTyped?
- * iTyped has a tiny size: 2kB
- * No jQuery dependency
+ * iTyped has a tiny size: 2kB.
+ * No jQuery dependency.
  * Just install and enjoy!
+ * Placeholder support.
 
 At now, if you just need to render Strings, **iTyped** is the best solution for you.
 
@@ -26,7 +27,7 @@ At now, if you just need to render Strings, **iTyped** is the best solution for 
 #### Install
 
 Npm: `npm install ityped` </br>
-CDN: `https://unpkg.com/ityped@1.0.0`
+CDN: `https://unpkg.com/ityped@1.0.1`
 
 
 #### The Gist:
@@ -38,17 +39,19 @@ init(`#element`, {
   // required - for now, only accepting texts
     strings: ['Put your strings here...', 'and Enjoy!'],
     //optional
-    typeSpeed:  100, //default
+    typeSpeed:   100, //default
     //optional
-    backSpeed:  50, //default
+    backSpeed:   50, //default
     //optional
-    startDelay: 500, //default
+    startDelay:  500, //default
     //optional
-    backDelay:  500, //default
+    backDelay:   500, //default
     //optional    
-    loop:       false, //default
+    loop:        false, //default
+    // optional
+    placeholder: false, //default
     //optional
-    showCursor: true, //default
+    showCursor:  true, //default
     //optional    
     disableBackTyping: false,
     // optional
@@ -145,6 +148,7 @@ iTyped properties
   * @param {Integer}  startDelay Time before typing starts
   * @param {Boolean}  showCursor Show the cursor element
   * @param {Boolean}  loop The animation loop
+  * @param {Boolean}  placeholder Write the string in the placeholder content
   * @param {Boolean}  disableBackTyping Disable the back typing of the last string 
   * @param {Function} onFinished The callback that will be called (if `loop` is false) once the last word is decremented
   **/
@@ -163,8 +167,10 @@ iTyped properties
     loop:       false, //default
     //optional
     showCursor: true, //default
+    // optional
+    placeholder: false, //default
     //optional    
-    disableBackTyping: false,
+    disableBackTyping: false, //default
     // optional
     cursorChar: "|", //default
     // optional: The callback called (if `loop` is false) 

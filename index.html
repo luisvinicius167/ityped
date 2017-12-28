@@ -35,6 +35,7 @@
 <body>
   <div id="app">
     <span id="ityped"></span>
+    <input type="text" id="ll">
   </div>
   <div id="appe">
     <span id="itypedy"></span>
@@ -42,11 +43,12 @@
   <script src="dist/index.js"></script>
   <script>
     ityped.init("#ityped")
-    ityped.init("#itypedy", { 
+
+    ityped.init("#ll", { 
       showCursor: false, 
       disableBackTyping: true, 
-      loop: false, 
-      onFinished: () => console.log('Yeah')})
+      placeholder: true
+    })
   </script>
 </body>
 
