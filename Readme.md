@@ -31,13 +31,13 @@ Installation
 #### NPM
 
 ~~~
-npm install typed.js
+npm install ityped
 ~~~
 
 #### Yarn
 
 ~~~
-yarn add typed.js
+yarn add ityped
 ~~~
 
 #### Browser
