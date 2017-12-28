@@ -49,7 +49,7 @@ export const start = (element, props) => {
     const len = strings[i].length
     const nextTime = (len * typeSpeed) + startDelay + (len * backSpeed) + backDelay
     times.push(nextTime)
-    const time = i === 0 ? startDelay : times[i - 1]
+    const time = i === 0 ? startDelay : startDelay + times[i - 1]
     writeString(element, i, props, time)
   }
 }

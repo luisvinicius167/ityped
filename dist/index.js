@@ -135,7 +135,7 @@ var start = function start(element, props) {
     var len = strings[i].length;
     var nextTime = len * typeSpeed + startDelay + len * backSpeed + backDelay;
     times.push(nextTime);
-    var time = i === 0 ? startDelay : times[i - 1];
+    var time = i === 0 ? startDelay : startDelay + times[i - 1];
     writeString(element, i, props, time);
   }
 };
