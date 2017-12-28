@@ -2,7 +2,7 @@
     * @name ityped
     * @description Dead simple Animated Typing with no dependencies
     * @author Luis Vinícius
-    * @email luis@uilabs.me
+    * @email luisviniciusbarreto@gmail.com
     */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
