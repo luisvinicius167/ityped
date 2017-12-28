@@ -36,9 +36,13 @@
   <div id="app">
     <span id="ityped"></span>
   </div>
+  <div id="appe">
+    <span id="itypedy"></span>
+  </div>
   <script src="dist/index.js"></script>
   <script>
-    ityped.init("#ityped", {})
+    ityped.init("#ityped", { })
+    ityped.init("#itypedy", { showCursor: false, stopLastWord: true, loop: false, onFinished: () => console.log('Yeah')})
   </script>
 </body>
 

@@ -1,9 +1,9 @@
 {
   "name": "ityped",
   "version": "1.0.0",
-  "description": "Dead simple Javascript animated typing, with no dependencies.",
-  "main": "dist/ityped.js",
-  "module": "src/ityped.js",
+  "description": "Dead simple Animated typing, with no dependencies.",
+  "main": "dist/index.min.js",
+  "module": "src/index.js",
   "files": [
     "dist",
     "src"
@@ -24,11 +24,9 @@
     "rollup": "^0.53.0",
     "rollup-plugin-babel": "^3.0.3",
     "rollup-plugin-uglify": "^2.0.1",
+    "babel-cli": "^6.26.0",
     "rollup-watch": "^4.3.1"
   },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "babel-cli": "^6.26.0"
-  }
+  "author": "Luis Vinicius <luis@startamus.com.br>",
+  "license": "MIT"
 }
