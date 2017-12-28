@@ -41,8 +41,12 @@
   </div>
   <script src="dist/index.js"></script>
   <script>
-    ityped.init("#ityped", { strings: ['Nice One', 'Ok'], startDelay: 1000 })
-    // ityped.init("#itypedy", { showCursor: false, disableBackTyping: true, loop: false, onFinished: () => console.log('Yeah')})
+    ityped.init("#ityped")
+    ityped.init("#itypedy", { 
+      showCursor: false, 
+      disableBackTyping: true, 
+      loop: false, 
+      onFinished: () => console.log('Yeah')})
   </script>
 </body>
 
