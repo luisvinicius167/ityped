@@ -71,13 +71,14 @@ var insertCursor = function insertCursor(element, cursor, props) {
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var typeString = function typeString(word, i, el, props) {
+  console.log(word, word.length, i);
   if (i === word.length - 1) {
-    return window.setTimeout(function () {
+    window.setTimeout(function () {
       var k = 0;
 
       var _loop = function _loop(l) {
         k += 1;
-        if (props.disableBackTyping && props.strings.indexOf(word) === props.strings.length - 1) {
+        if (props.disableBackTyping && isLastLetterOfLastString(word, props) && !props.loop) {
           return {
             v: props.onFinished()
           };
@@ -123,6 +124,7 @@ var writeString = function writeString(el, position, props, time) {
 
 var start = function start(element, props) {
   var times = [];
+  console.log(props);
   var strings = props.strings,
       startDelay = props.startDelay,
       typeSpeed = props.typeSpeed,

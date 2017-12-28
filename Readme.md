@@ -113,7 +113,7 @@ init(`#element`, {
   init('#element'});
 ```
  
- Set multiples instances of Ityped at the same time, with different properties:
+ Set multiples instances of iTyped at the same time, with different properties:
 
 ```html
 
