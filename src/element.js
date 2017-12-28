@@ -1,2 +1,4 @@
-export const appendElement = parent => child => document.querySelector(parent).appendChild(child)
-export const getElement = el => document.querySelector(el)
+export const getElement = element => 
+  typeof element === "string" 
+    ? document.querySelector(element)
+    : element

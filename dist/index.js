@@ -22,17 +22,17 @@ var setProps = function setProps(_ref) {
       _ref$typeSpeed = _ref.typeSpeed,
       typeSpeed = _ref$typeSpeed === undefined ? 100 : _ref$typeSpeed,
       _ref$backSpeed = _ref.backSpeed,
-      backSpeed = _ref$backSpeed === undefined ? 100 : _ref$backSpeed,
+      backSpeed = _ref$backSpeed === undefined ? 50 : _ref$backSpeed,
       _ref$backDelay = _ref.backDelay,
-      backDelay = _ref$backDelay === undefined ? 1200 : _ref$backDelay,
+      backDelay = _ref$backDelay === undefined ? 500 : _ref$backDelay,
       _ref$startDelay = _ref.startDelay,
-      startDelay = _ref$startDelay === undefined ? 100 : _ref$startDelay,
+      startDelay = _ref$startDelay === undefined ? 500 : _ref$startDelay,
       _ref$cursorChar = _ref.cursorChar,
       cursorChar = _ref$cursorChar === undefined ? '|' : _ref$cursorChar,
       _ref$showCursor = _ref.showCursor,
       showCursor = _ref$showCursor === undefined ? true : _ref$showCursor,
-      _ref$stopLastWord = _ref.stopLastWord,
-      stopLastWord = _ref$stopLastWord === undefined ? false : _ref$stopLastWord,
+      _ref$disableBackTypin = _ref.disableBackTyping,
+      disableBackTyping = _ref$disableBackTypin === undefined ? false : _ref$disableBackTypin,
       _ref$onFinished = _ref.onFinished,
       onFinished = _ref$onFinished === undefined ? function () {} : _ref$onFinished,
       _ref$loop = _ref.loop,
@@ -46,13 +46,13 @@ var setProps = function setProps(_ref) {
     startDelay: startDelay,
     showCursor: showCursor,
     loop: loop,
-    stopLastWord: stopLastWord,
+    disableBackTyping: disableBackTyping,
     onFinished: onFinished
   };
 };
 
-var getElement = function getElement(el) {
-  return document.querySelector(el);
+var getElement = function getElement(element) {
+  return typeof element === "string" ? document.querySelector(element) : element;
 };
 
 var getCursor = function getCursor(props) {
@@ -77,8 +77,7 @@ var typeString = function typeString(word, i, el, props) {
 
       var _loop = function _loop(l) {
         k += 1;
-        console.log(props.stopLastWord);
-        if (props.stopLastWord && props.strings.indexOf(word) === props.strings.length - 1) {
+        if (props.disableBackTyping && props.strings.indexOf(word) === props.strings.length - 1) {
           return {
             v: props.onFinished()
           };
@@ -98,11 +97,15 @@ var typeString = function typeString(word, i, el, props) {
   el.innerHTML += word[i];
 };
 
+var isLastLetterOfLastString = function isLastLetterOfLastString(word, props) {
+  return props.strings.indexOf(word) === props.strings.length - 1;
+};
 var eraseString = function eraseString(i, el, props, word) {
   el.innerHTML = el.innerHTML.substring(0, --i);
-  if (i === 0 && props.strings.indexOf(word) === props.strings.length - 1 && props.loop) {
-    props.onFinished ? props.onFinished() : null;
+  if (i === 0 && isLastLetterOfLastString(word, props) && props.loop) {
     start(el, props);
+  } else if (isLastLetterOfLastString(word, props) && !props.loop) {
+    props.onFinished();
   }
 };
 
@@ -137,7 +140,7 @@ var start = function start(element, props) {
 };
 
 var init = function init(el, config) {
-  var props = setProps(config),
+  var props = setProps(config || {}),
       element = getElement(el);
   insertCursor(element, getCursor(props), props);
   start(element, props);

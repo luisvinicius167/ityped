@@ -2,10 +2,9 @@ const typeString = (word, i, el, props) => {
   if (i === word.length - 1) {
     return window.setTimeout(() => {
       let k = 0
-      for (let l = word.length -1; l >= 0; l--) {
+      for (let l = word.length - 1; l >= 0; l--) {
         k += 1
-        console.log(props.stopLastWord)
-        if (props.stopLastWord && ( props.strings.indexOf(word) === props.strings.length - 1)) {
+        if (props.disableBackTyping && (props.strings.indexOf(word) === props.strings.length - 1)) {
           return props.onFinished()
         }
         setTimeout(() => eraseString(l, el, props, word), props.backSpeed * k)
@@ -15,14 +14,16 @@ const typeString = (word, i, el, props) => {
   el.innerHTML += word[i]
 }
 
-const eraseString = ( i, el, props, word ) => {
+const isLastLetterOfLastString = (word, props) => props.strings.indexOf(word) === props.strings.length - 1
+const eraseString = (i, el, props, word) => {
   el.innerHTML = el.innerHTML.substring(0, --i)
-  if ( i === 0 
-      && props.strings.indexOf(word) === props.strings.length - 1 
-      && props.loop
+  if (i === 0
+    && isLastLetterOfLastString(word, props)
+    && props.loop
   ) {
-    props.onFinished ? props.onFinished() : null
     start(el, props)
+  } else if (isLastLetterOfLastString(word, props) && !props.loop) {
+    props.onFinished()
   }
 }
 
@@ -42,11 +43,11 @@ export const start = (element, props) => {
   const times = []
   const { strings, startDelay, typeSpeed, backSpeed, backDelay, loop } = props
   const len = strings.length
-  for (let i=0; i < strings.length; i++) {
+  for (let i = 0; i < strings.length; i++) {
     const len = strings[i].length
-    const nextTime = (len * typeSpeed) + startDelay + ( len * backSpeed ) + backDelay
+    const nextTime = (len * typeSpeed) + startDelay + (len * backSpeed) + backDelay
     times.push(nextTime)
-    const time = i === 0 ? startDelay : times[i-1]
+    const time = i === 0 ? startDelay : times[i - 1]
     writeString(element, i, props, time)
   }
 }

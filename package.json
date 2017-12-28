@@ -27,6 +27,6 @@
     "babel-cli": "^6.26.0",
     "rollup-watch": "^4.3.1"
   },
-  "author": "Luis Vinicius <luis@startamus.com.br>",
+  "author": "Luis Vinicius <luisviniciusbarreto@gmail.com>",
   "license": "MIT"
 }
