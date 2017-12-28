@@ -1,16 +1,30 @@
 {
   "name": "ityped",
+<<<<<<< HEAD
   "version": "1.0.0",
   "description": "Dead simple Animated typing, with no dependencies.",
   "main": "dist/index.min.js",
   "module": "src/index.js",
+=======
+  "version": "0.0.10",
+  "description": "Dead simple Animated typing, with no dependencies.",
+>>>>>>> fc999d63abfe870d159ec132ec8c935da84970b9
   "files": [
     "dist",
     "src"
   ],
+<<<<<<< HEAD
   "scripts": {
     "prebuild": "npm run clean",
     "pre:commit": "yarn build",
+=======
+  "main": "dist/ityped.js",
+  "module": "src/ityped.js",
+  "author": "Luis Vinicius <luis@startamus.com.br>",
+  "license": "MIT",
+  "scripts": {
+    "prebuild": "npm run clean",
+>>>>>>> fc999d63abfe870d159ec132ec8c935da84970b9
     "build": "npm run rollup & npm run rollup:production",
     "build:watch": "npm run rollup -- --watch",
     "clean": "del-cli \"dist/**/*\"",
@@ -19,6 +33,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "babel-preset-env": "^1.6.1",
     "cross-env": "^5.1.3",
     "del-cli": "^1.1.0",
@@ -30,4 +45,14 @@
   },
   "author": "Luis Vinicius <luisviniciusbarreto@gmail.com>",
   "license": "MIT"
+=======
+    "babel-preset-env": "~1.4.0",
+    "cross-env": "~5.0.0",
+    "del-cli": "~1.0.0",
+    "rollup": "~0.41.6",
+    "rollup-plugin-babel": "~2.7.1",
+    "rollup-plugin-uglify": "~2.0.0",
+    "rollup-watch": "~3.2.2"
+  }
+>>>>>>> fc999d63abfe870d159ec132ec8c935da84970b9
 }

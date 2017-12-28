@@ -14,7 +14,7 @@ export default {
     * @name ityped
     * @description Dead simple Animated Typing with no dependencies
     * @author Luis Vinícius
-    * @email luis@uilabs.me
+    * @email luisviniciusbarreto@gmail.com
     */`,
   },
   plugins: [
