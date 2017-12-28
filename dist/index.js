@@ -100,6 +100,7 @@ var typeString = function typeString(word, i, el, props) {
 var isLastLetterOfLastString = function isLastLetterOfLastString(word, props) {
   return props.strings.indexOf(word) === props.strings.length - 1;
 };
+
 var eraseString = function eraseString(i, el, props, word) {
   el.innerHTML = el.innerHTML.substring(0, --i);
   if (i === 0 && isLastLetterOfLastString(word, props) && props.loop) {
@@ -129,10 +130,10 @@ var start = function start(element, props) {
       backDelay = props.backDelay,
       loop = props.loop;
 
-  var len = strings.length;
-  for (var i = 0; i < strings.length; i++) {
-    var _len = strings[i].length;
-    var nextTime = _len * typeSpeed + startDelay + _len * backSpeed + backDelay;
+  var arrLen = strings.length;
+  for (var i = 0; i < arrLen; i++) {
+    var len = strings[i].length;
+    var nextTime = len * typeSpeed + startDelay + len * backSpeed + backDelay;
     times.push(nextTime);
     var time = i === 0 ? startDelay : times[i - 1];
     writeString(element, i, props, time);

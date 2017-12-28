@@ -14,7 +14,9 @@ const typeString = (word, i, el, props) => {
   el.innerHTML += word[i]
 }
 
-const isLastLetterOfLastString = (word, props) => props.strings.indexOf(word) === props.strings.length - 1
+const isLastLetterOfLastString = (word, props) => 
+  props.strings.indexOf(word) === props.strings.length - 1
+
 const eraseString = (i, el, props, word) => {
   el.innerHTML = el.innerHTML.substring(0, --i)
   if (i === 0
@@ -42,8 +44,8 @@ const writeString = (el, position, props, time) => {
 export const start = (element, props) => {
   const times = []
   const { strings, startDelay, typeSpeed, backSpeed, backDelay, loop } = props
-  const len = strings.length
-  for (let i = 0; i < strings.length; i++) {
+  const arrLen = strings.length
+  for (let i = 0; i < arrLen; i++) {
     const len = strings[i].length
     const nextTime = (len * typeSpeed) + startDelay + (len * backSpeed) + backDelay
     times.push(nextTime)
