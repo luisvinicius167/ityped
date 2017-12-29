@@ -19,7 +19,6 @@ and begin a new sentence for however many strings you've set.
 Features
 ------------
  * iTyped has a tiny size: 2 kB.
- * Jquery Typed.js Library size: 11.2 KB.
  * iTyped has no jQuery dependency.
  * Just install and enjoy!
  * Placeholder input support.
