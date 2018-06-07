@@ -1,6 +1,6 @@
 # iTyped
 
-[![npm package](https://img.shields.io/badge/npm-v1.0.2-lightgray.svg)](https://www.npmjs.com/package/ityped)
+[![npm package](https://img.shields.io/badge/npm-v1.0.3-lightgray.svg)](https://www.npmjs.com/package/ityped)
 
 > Dead simple Animated typing, with no dependencies.
 
@@ -44,7 +44,7 @@ yarn add ityped
 #### Browser
 
 ~~~
-https://unpkg.com/ityped@1.0.2
+https://unpkg.com/ityped@1.0.3
 ~~~
 
 ### CSS
