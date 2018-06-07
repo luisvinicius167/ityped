@@ -35,16 +35,21 @@
 <body>
   <div id="app">
     <span id="ityped"></span>
-    <input type="text" id="ll">
   </div>
-  <div id="appe">
-    <span id="itypedy"></span>
+  <div>
+    <input type="text" id="placeholder">
   </div>
   <script src="dist/index.js"></script>
   <script>
-    ityped.init("#ityped", { strings: ['Hey man'] } )
+    ityped.init(document.querySelector("#ityped"), {
+      showCursor: false,
+      strings: ['Very nice project!', 'Yeah!', 'Shure, awesome!']
+    })
 
-    ityped.init("#ll", { placeholder: true })
+    ityped.init("#placeholder", {
+      placeholder: true,
+      showCursor: false
+    })
   </script>
 </body>
 
