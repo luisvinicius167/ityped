@@ -54,102 +54,74 @@ var setProps = function setProps(_ref) {
   };
 };
 
-var getElement = function getElement(element) {
-  return typeof element === "string" ? document.querySelector(element) : element;
-};
+var init = function init(element, properties) {
+  var i = 0,
+      l = void 0,
+      STRINGS_TO_ITERATE = void 0;
 
-var getCursor = function getCursor(props) {
-  var cursorChar = props.cursorChar;
+  var typewrite = function typewrite(strings, props) {
+    if (i === l) if (props.loop) i = 0;
+    setTimeout(function () {
+      typeString(strings[i], props);
+    }, props.startDelay);
+  };
 
-  var cursor = document.createElement('span');
-  cursor.classList.add('ityped-cursor');
-  cursor.textContent = cursorChar;
-  return cursor;
-};
+  var typeString = function typeString(str, props) {
+    var index = 0,
+        strLen = str.length;
+    var intervalID = setInterval(function () {
+      props.placeholder ? element.placeholder += str[index] : element.textContent += str[index];
+      if (++index === strLen) return onStringTyped(intervalID, props);
+    }, props.typeSpeed);
+  };
 
-var insertCursor = function insertCursor(element, cursor, props) {
-  return props.showCursor ? element.insertAdjacentElement('afterend', cursor) : null;
-};
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var typeString = function typeString(word, i, el, props) {
-  if (i === word.length - 1) {
-    window.setTimeout(function () {
-      var k = 0;
-
-      var _loop = function _loop(l) {
-        k += 1;
-        if (props.disableBackTyping && isLastLetterOfLastString(word, props) && !props.loop) {
-          return {
-            v: props.onFinished()
-          };
-        }
-        setTimeout(function () {
-          return eraseString(l, el, props, word);
-        }, props.backSpeed * k);
-      };
-
-      for (var l = word.length - 1; l >= 0; l--) {
-        var _ret = _loop(l);
-
-        if ((typeof _ret === "undefined" ? "undefined" : _typeof(_ret)) === "object") return _ret.v;
-      }
+  var onStringTyped = function onStringTyped(id, props) {
+    clearInterval(id);
+    if (props.disableBackTyping && i === l - 1) {
+      return props.onFinished();
+    }
+    if (!props.loop && i === l - 1) {
+      return props.onFinished();
+    }
+    setTimeout(function () {
+      return eraseString(props);
     }, props.backDelay);
-  }
+  };
 
-  props.placeholder ? el.placeholder += word[i] : el.innerHTML += word[i];
-};
+  var eraseString = function eraseString(props) {
+    var str = props.placeholder ? element.placeholder : element.textContent,
+        strLen = str.length;
+    var intervalID = setInterval(function () {
+      props.placeholder ? element.placeholder = element.placeholder.substr(0, --strLen) : element.textContent = str.substr(0, --strLen);
+      if (strLen === 0) return onStringErased(intervalID, props);
+    }, props.backSpeed);
+  };
 
-var isLastLetterOfLastString = function isLastLetterOfLastString(word, props) {
-  return props.strings.indexOf(word) === props.strings.length - 1;
-};
+  var onStringErased = function onStringErased(id, props) {
+    clearInterval(id);
+    ++i;
+    typewrite(STRINGS_TO_ITERATE, props);
+  };
 
-var eraseString = function eraseString(i, el, props, word) {
-  props.placeholder ? el.placeholder = el.placeholder.substring(0, --i) : el.innerHTML = el.innerHTML.substring(0, --i);
+  var setCursor = function setCursor(element, props) {
+    var cursorSpan = document.createElement('span');
+    cursorSpan.classList.add('ityped-cursor');
+    cursorSpan.textContent = '|';
+    cursorSpan.textContent = props.cursorChar;
+    element.insertAdjacentElement('afterend', cursorSpan);
+  };
 
-  if (i === 0 && isLastLetterOfLastString(word, props) && props.loop) {
-    start(el, props);
-  } else if (isLastLetterOfLastString(word, props) && !props.loop) {
-    props.onFinished();
-  }
-};
+  var startTyping = function startTyping(prop) {
+    var props = setProps(prop || {});
+    var strings = props.strings;
+    STRINGS_TO_ITERATE = strings;
+    l = strings.length;
+    if (typeof element === "string") element = document.querySelector(element);
+    if (props.showCursor) setCursor(element, props);
+    typewrite(strings, props);
+  };
 
-var writeString = function writeString(el, position, props, time) {
-  var word = props.strings[position];
-  var startTick = window.setTimeout(function () {
-    Array.from(word).forEach(function (letter, i) {
-      return setTimeout(function () {
-        return typeString(word, i, el, props);
-      }, props.typeSpeed * (i + 1));
-    });
-  }, time);
-};
-
-var start = function start(element, props) {
-  var times = [];
-  var strings = props.strings,
-      startDelay = props.startDelay,
-      typeSpeed = props.typeSpeed,
-      backSpeed = props.backSpeed,
-      backDelay = props.backDelay,
-      loop = props.loop;
-
-  var arrLen = strings.length;
-  for (var i = 0; i < arrLen; i++) {
-    var len = strings[i].length;
-    var nextTime = len * typeSpeed + startDelay + len * backSpeed + backDelay;
-    times.push(nextTime);
-    var time = i === 0 ? startDelay : startDelay + times[i - 1];
-    writeString(element, i, props, time);
-  }
-};
-
-var init = function init(el, config) {
-  var props = setProps(config || {}),
-      element = getElement(el);
-  insertCursor(element, getCursor(props), props);
-  start(element, props);
+  return startTyping(properties);
 };
 
 exports.init = init;

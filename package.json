@@ -1,12 +1,11 @@
 {
   "name": "ityped",
-  "version": "1.0.1",
-  "description": "Dead simple Animated typing, with no dependencies.",
+  "version": "1.0.2",
+  "description": "Dead simple animated typing, with no dependencies.",
   "main": "dist/index.min.js",
   "module": "src/index.js",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "scripts": {
     "prebuild": "npm run clean",
