@@ -152,22 +152,22 @@ Want the animated blinking cursor?
      backDelay:  500,
     
     /**
-     * @param {Bollean} loop The animation loop
+     * @param {Boolean} loop The animation loop
      */
      loop:       false,
     
     /**
-     * @param {Bollean} showCursor Show the cursor element
+     * @param {Boolean} showCursor Show the cursor element
      */
      showCursor: true,
     
     /**
-     * @param {Bollean} placeholder Write the string in the placeholder content
+     * @param {Boolean} placeholder Write the string in the placeholder content
      */
      placeholder: false,
     
     /**
-     * @param {Bollean} disableBackTyping Disable back typing for the last string sentence 
+     * @param {Boolean} disableBackTyping Disable back typing for the last string sentence 
      */
      disableBackTyping: false,
     
