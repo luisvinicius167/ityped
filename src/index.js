@@ -6,6 +6,7 @@
  */
 const setProps = ({
   strings = ['Put your strings here...', 'and Enjoy!'],
+  colors = [],
   typeSpeed = 100,
   backSpeed = 50,
   backDelay = 500,
@@ -18,6 +19,7 @@ const setProps = ({
   loop = true
 }) => ({
   strings,
+  colors,
   typeSpeed,
   backSpeed,
   cursorChar,
@@ -40,6 +42,14 @@ export const init = (element, properties) => {
   }
 
   const typeString = (str, props) => {
+    const key = props.strings.indexOf(str)
+    if (props.colors[key]) {
+      const color = props.colors[key]
+      element.style.color = color
+    } else {
+      element.style.color = 'inherit'
+    }
+
     let index = 0,
       strLen = str.length;
     let intervalID = setInterval(() => {
