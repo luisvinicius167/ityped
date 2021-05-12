@@ -39,11 +39,12 @@
   <div>
     <input type="text" id="placeholder">
   </div>
-  <script src="https://unpkg.com/ityped@1.0.2"></script>
+  <script src="dist/index.min.js"></script>
   <script>
     ityped.init(document.querySelector("#ityped"), {
       showCursor: false,
-      strings: ['Very nice project!', 'Yeah!', 'Shure, awesome!']
+      strings: ['Very nice project!', 'Yeah!', 'Shure, awesome!'],
+      loopDelay: 1000
     })
 
     ityped.init("#placeholder", {

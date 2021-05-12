@@ -10,6 +10,7 @@ const setProps = ({
   backSpeed = 50,
   backDelay = 500,
   startDelay = 500,
+  loopDelay = 0,
   cursorChar = '|',
   placeholder = false,
   showCursor = true,
@@ -22,6 +23,7 @@ const setProps = ({
   backSpeed,
   cursorChar,
   backDelay,
+  loopDelay,
   placeholder,
   startDelay,
   showCursor,
@@ -34,9 +36,12 @@ export const init = (element, properties) => {
   let i = 0, l, STRINGS_TO_ITERATE;
 
   const typewrite = (strings, props) => {
-    if (i === l)
-      if (props.loop) i = 0;
-    setTimeout(() => { typeString(strings[i], props); }, props.startDelay);
+    let extraDelay = 0;
+    if (i === l && props.loop) {
+      i = 0;
+      extraDelay = props.loopDelay;
+    }
+    setTimeout(() => { typeString(strings[i], props); }, props.startDelay + extraDelay);
   }
 
   const typeString = (str, props) => {
