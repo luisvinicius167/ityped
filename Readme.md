@@ -154,7 +154,7 @@ Want the animated blinking cursor?
      /**
      * @param {Number} loopDelay Time before looping
      */
-     loopDelay:  500,
+     loopDelay:  0,
     
     /**
      * @param {Boolean} loop The animation loop
