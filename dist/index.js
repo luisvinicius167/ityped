@@ -27,6 +27,8 @@ var setProps = function setProps(_ref) {
       backDelay = _ref$backDelay === undefined ? 500 : _ref$backDelay,
       _ref$startDelay = _ref.startDelay,
       startDelay = _ref$startDelay === undefined ? 500 : _ref$startDelay,
+      _ref$loopDelay = _ref.loopDelay,
+      loopDelay = _ref$loopDelay === undefined ? 0 : _ref$loopDelay,
       _ref$cursorChar = _ref.cursorChar,
       cursorChar = _ref$cursorChar === undefined ? '|' : _ref$cursorChar,
       _ref$placeholder = _ref.placeholder,
@@ -45,6 +47,7 @@ var setProps = function setProps(_ref) {
     backSpeed: backSpeed,
     cursorChar: cursorChar,
     backDelay: backDelay,
+    loopDelay: loopDelay,
     placeholder: placeholder,
     startDelay: startDelay,
     showCursor: showCursor,
@@ -60,10 +63,14 @@ var init = function init(element, properties) {
       STRINGS_TO_ITERATE = void 0;
 
   var typewrite = function typewrite(strings, props) {
-    if (i === l) if (props.loop) i = 0;
+    var extraDelay = 0;
+    if (i === l && props.loop) {
+      i = 0;
+      extraDelay = props.loopDelay;
+    }
     setTimeout(function () {
       typeString(strings[i], props);
-    }, props.startDelay);
+    }, props.startDelay + extraDelay);
   };
 
   var typeString = function typeString(str, props) {

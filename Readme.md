@@ -150,6 +150,11 @@ Want the animated blinking cursor?
      * @param {Number} backDelay Time before backspacing
      */
      backDelay:  500,
+     
+     /**
+     * @param {Number} loopDelay Time before looping
+     */
+     loopDelay:  0,
     
     /**
      * @param {Boolean} loop The animation loop
